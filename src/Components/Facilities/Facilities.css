@@ -1,0 +1,26 @@
+.facilities {
+    background: rgb(241, 110, 49);
+}
+
+.facilities_image {
+    text-align: center;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.facilities_image img {
+    height: 150px;
+}
+
+.all_facilities_image {
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 1rem;
+}
+
+.all_facilities_image:hover {
+    transform: translate(0, -10px);
+}
+
+

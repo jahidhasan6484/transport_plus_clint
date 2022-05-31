@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
+.loading {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading_text {
+    font-family: 'Sacramento', cursive;
+    font-size: 2rem;
+    letter-spacing: 10px;
+    font-weight: 600;
+}

@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.logo {
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+.hambergur_menu {
+    color: #fff;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar {
+    background: #2a2a2b;
+    color: white;
+}
+
+li {
+    list-style: none;
+}
+
+.nav_menu {
+    text-transform: capitalize;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+    transition: 0.3s;
+    letter-spacing: 3px;
+    font-size: 0.7rem;
+}
+
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: white;
+}
+
+.user_icon {
+    width: 30px;
+}
+
+@media only screen and (max-width: 800px) {
+    .dropdown {
+        padding-top: 2rem;
+    }
+
+    .nav_menu:hover {
+        background: rgb(82, 81, 81);
+        border-radius: 7px;
+    }
+}
+
+.signButton {
+    cursor: pointer;
+}

@@ -1,0 +1,111 @@
+.search_result {
+    background: #f5f5f5;
+}
+
+.ticket_ui {
+    padding-top: 2rem;
+}
+
+.ticket_details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.seat_status {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 0.8rem;
+    padding-bottom: 1rem;
+}
+
+.seats {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.seat {
+    color: #fff;
+    font-size: 0.9rem;
+    border-radius: 7px;
+    border: 2px solid #000;
+    padding: 5px 10px;
+}
+
+.available {
+    color: #fff;
+    border-radius: 7px;
+    border: 2px solid green;
+    background: green;
+}
+
+.selected {
+    color: #fff;
+    border-radius: 7px;
+    border: 2px solid #000;
+    background: #000;
+}
+
+.unavailable {
+    color: fff;
+    border-radius: 7px;
+    border: 2px solid red;
+    background: red;
+}
+
+.seat {
+    margin: 10px 0px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.seat:hover {
+    margin: 10px 0px;
+    transform: scale(1.10);
+}
+
+.coloum_name {
+    margin-bottom: 1rem;
+}
+
+.seat_number {
+    margin: 22px 0px;
+}
+
+.avialable_seat::before {
+    content: ".......";
+    color: green;
+    background: green;
+    border-radius: 4px;
+}
+
+.selected_seat::before {
+    content: ".......";
+    color: #000;
+    background: #000;
+    border-radius: 4px;
+}
+
+.unavialable_seat::before {
+    content: ".......";
+    color: red;
+    background: red;
+    border-radius: 4px;
+}
+
+
+.ticket_count {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+
+.standing_ticket_button {
+    margin-top: 2rem;
+    float: right;
+    border: 1px solid #dbdada;
+    padding: 5px 20px;
+    background: none;
+    border-radius: 4px;
+    width: 100%;
+}

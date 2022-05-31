@@ -1,38 +1,88 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500&family=Poppins:wght@300;400&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+    text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.section_design {
+    padding: 7rem 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.section_title {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5rem;
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+@media screen and (max-width: 600px) {
+    .section_design {
+        padding: 3rem 0;
+    }
+
+    .section_title {
+        margin-bottom: 2rem;
+        text-align: center;
+        margin-top: 4rem;
+    }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.change_page {
+    padding-left: 5px;
+    color: red;
+}
+
+.change_page:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+.verifi {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.register_button,
+.login_button {
+    padding: 5px 40px;
+    font-size: 0.9rem;
+    letter-spacing: 5px;
+    background: #fff;
+    border: none;
+    border-radius: 4px;
+    transition: 0.3s;
+    text-transform: uppercase;
+    border: 1px solid #dbdada;
+    color: #000;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.register_button:hover,
+.login_button:hover {
+    background: #dbdada;
+    color: #000;
+}
+
+.error_message {
+    padding-top: 5px;
+    color: red;
+    font-size: 0.8rem;
+}
+
+.page_route {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.form-check-label {
+    font-size: 0.9rem;
 }
