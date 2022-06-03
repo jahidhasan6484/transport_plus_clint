@@ -4,6 +4,7 @@ import video09 from '../../videos/video09.mp4';
 import { Link } from 'react-router-dom';
 import Tickets from '../Tickets/Tickets';
 import Facilities from '../Facilities/Facilities';
+import SearchTicket from '../SearchTicket/SearchTicket';
 
 const Slider = () => {
     return (
@@ -21,7 +22,7 @@ const Slider = () => {
                 </div>
             </div>
 
-            <Tickets />
+            <SearchTicket />
             <Facilities />
         </>
 

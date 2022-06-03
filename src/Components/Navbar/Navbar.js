@@ -47,6 +47,18 @@ const Navbar = () => {
                             </li>
                         </Link>
 
+                        <Link to="/addBus">
+                            <li className="nav-item nav_menu">
+                                Add Bus
+                            </li>
+                        </Link>
+                        
+                        <Link to="/allBus">
+                            <li className="nav-item nav_menu">
+                                All Bus
+                            </li>
+                        </Link>
+
                     </ul>
 
                     <div className="d-flex">
