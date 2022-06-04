@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
 
 const Update = () => {
     const { id } = useParams();
@@ -40,7 +40,13 @@ const Update = () => {
             },
             body: JSON.stringify(bus)
         })
-        .then()
+            .then(res => res.json())
+            .then(data => {
+                if(data.modifiedCount > 0) {
+                    alert("Seat booked successsfully");
+                    setBus({});
+                }
+            })
 
         e.preventDefault();
     }

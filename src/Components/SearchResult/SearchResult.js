@@ -1,11 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BusContext } from '../../App';
 import './SearchResult.css';
 
 const SearchResult = () => {
+
+    // const [from, to, journeyType, route, date, time] = useContext(BusContext);
+
+// console.log("Hey, this is from data", from.from);
+// console.log("Hey, this is to data", to);
+// console.log("Hey, this is journeyType data", journeyType.journeyType);
+// console.log("Hey, this is route data", route.route);
+// console.log("Hey, this is date data", date.date);
+// console.log("Hey, this is time data", time.time);
+
+
     const [count, setCount] = useState("A3");
-
-
 
     const [buses, setBuses] = useState([]);
 
@@ -15,7 +25,7 @@ const SearchResult = () => {
         fetch('http://localhost:5000/addBus')
             .then(res => res.json())
             .then(data => {
-                const desire = data.filter(bus => bus.route === "Dhanmondi" && bus.userType === "Student" && bus.journeyType === "Return");
+                const desire = data.filter(bus => bus.route === "Dhanmondi" && bus.journeyType === "Departure");
                 setBuses(desire);
             });
     }, []);

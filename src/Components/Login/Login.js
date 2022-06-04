@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import auth from '../../firebase.init';
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -6,8 +6,11 @@ import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hook
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import { BusContext } from "../../App";
 
 const Login = () => {
+    const [isStudent, setIsStudent, isFaculty, setIsFaculty] = useContext(BusContext);
+
     const [user] = useAuthState(auth);
 
     // for term agree and not agree:
@@ -32,12 +35,24 @@ const Login = () => {
         <LoadingPage />
     }
 
+
     const handleEmailChange = (event) => {
-        let emailPattern = /@diu.edu.bd/;
-        if (emailPattern.test(event.target.value)) {
+        let studentEmailPattern = /@diu.edu.bd/;
+        let facultyEmailPattern = /@daffodilvarsity.edu.bd/;
+
+        if (studentEmailPattern.test(event.target.value)) {
             setUserInfo({ ...userInfo, email: event.target.value });
             setErrors({ ...errors, emailError: "" });
-        } else {
+            setIsStudent(true);
+            setIsFaculty(false);
+        }
+        else if (facultyEmailPattern.test(event.target.value)) {
+            setUserInfo({ ...userInfo, email: event.target.value });
+            setErrors({ ...errors, emailError: "" });
+            setIsFaculty(true);
+            setIsStudent(false);
+        }
+        else {
             setErrors({ ...errors, emailError: "Please enter DIU email address" });
             setUserInfo({ ...userInfo, email: "" });
         }
@@ -78,10 +93,12 @@ const Login = () => {
         if (user) {
             navigate(from, { replace: true });
         }
+
     }, [user, navigate, from]);
 
-    console.log(user);
 
+    console.log("Is Student:", isStudent);
+    console.log("Is Faculty:", isFaculty);
 
 
     return (

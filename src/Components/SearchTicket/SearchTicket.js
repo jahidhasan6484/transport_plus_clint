@@ -1,18 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Options from "../Tickets/Options";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import addDays from 'date-fns/addDays';
-import { Link, Navigate } from "react-router-dom";
+import { BusContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const SearchTicket = () => {
-    const [journeyType, setJourneyType] = useState(false);
+    const [from, setFrom, to, setTo, journeyType, setJourneyType, route, setRoute, date, setDate, time, setTime] = useContext(BusContext);
+
+    const navigate = useNavigate();
+
+    const [journeyTypeInput, setJourneyTypeInput] = useState(false);
     const [warning, setWarning] = useState(true);
 
     const [departureType, setDepartureType] = useState(false);
     const [returnType, setReturnType] = useState(false);
 
-    const [date, setDate] = useState(null);
 
     const handleChange = (e) => {
         const searchType = e.target.value;
@@ -20,10 +24,12 @@ const SearchTicket = () => {
         if (searchType === "departure") {
             setReturnType(false);
             setDepartureType(true);
+            setJourneyType("Departure");
         }
         else if (searchType === "return") {
             setReturnType(true);
             setDepartureType(false);
+            setJourneyType("Return");
         };
 
         setWarning(false);
@@ -57,24 +63,48 @@ const SearchTicket = () => {
         }
 
 
-        const newData = {
-            from, to, route, date, time
+        const handleFrom = {
+            from
         };
+        setFrom(handleFrom);
 
-        fetch('http://localhost:5000/search', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newData)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    alert("Data added successfully");
-                    e.target.reset();
-                }
-            })
+        const handleTo = {
+            to,
+        };
+        setTo(handleTo);
+
+        const handleRoute = {
+            route
+        };
+        setRoute(handleRoute);
+
+        const handleTime = {
+            time
+        };
+        setTime(handleTime);
+
+        // console.log("Data From", from);
+        // console.log("Data To", to);
+        // console.log("Data Journey Type", journeyType);
+        // console.log("Data Date", date);
+        // console.log("Data Time", time);
+
+        // fetch('http://localhost:5000/search', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(newData)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (data.insertedId) {
+        //             alert("Data added successfully");
+        //             e.target.reset();
+        //         }
+        //     })
+
+        navigate('/searchResult');
         e.preventDefault();
     }
 
@@ -86,11 +116,11 @@ const SearchTicket = () => {
                 <nav className="nav">
                     <div className="search__type">
                         <label>Departure</label>
-                        <input type="radio" name="search_type" value="departure" onChange={handleChange} onClick={() => setJourneyType(true)} />
+                        <input type="radio" name="search_type" value="departure" onChange={handleChange} onClick={() => setJourneyTypeInput(true)} />
                     </div>
 
                     <div className="search__type">
-                        <input type="radio" name="search_type" value="return" onChange={handleChange} onClick={() => setJourneyType(true)} />
+                        <input type="radio" name="search_type" value="return" onChange={handleChange} onClick={() => setJourneyTypeInput(true)} />
                         <label>Return</label>
                     </div>
 
@@ -101,7 +131,7 @@ const SearchTicket = () => {
                 }
 
                 {
-                    journeyType &&
+                    journeyTypeInput &&
 
                     <form onSubmit={handleAddData}>
 
@@ -171,7 +201,7 @@ const SearchTicket = () => {
                         </div>
 
                         <div>
-                        <input type="submit" value="Search" className='btn btn-primary mt-2' />
+                            <input type="submit" value="Search" className='btn btn-primary mt-2' />
                         </div>
 
                     </form>

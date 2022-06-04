@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import SearchResult from './Components/SearchResult/SearchResult';
@@ -17,10 +17,20 @@ import AddBus from './Components/AddBus/AddBus';
 import AllBus from './Components/AllBus/AllBus';
 import Update from './Components/Update/Update';
 
+export const BusContext = createContext();
+
 function App() {
+  const [from, setFrom] = useState({});
+  const [to, setTo] = useState({});
+  const [journeyType, setJourneyType] = useState({});
+  const [route, setRoute] = useState({});
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState({});
+  const [isStudent, setIsStudent] = useState(false);
+  const [isFaculty, setIsFaculty] = useState(false);
 
   return (
-    <>
+    <BusContext.Provider value={[from, setFrom, to, setTo, journeyType, setJourneyType, route, setRoute, date, setDate, time, setTime, isStudent, setIsStudent, isFaculty, setIsFaculty]}>
       <Navbar />
 
       <Routes>
@@ -58,7 +68,7 @@ function App() {
       </Routes>
 
       <Sponsors />
-    </>
+    </BusContext.Provider>
   );
 }
 
