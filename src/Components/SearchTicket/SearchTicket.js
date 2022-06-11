@@ -1,35 +1,33 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Options from "../Tickets/Options";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import addDays from 'date-fns/addDays';
-import { BusContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 
 const SearchTicket = () => {
-    const [from, setFrom, to, setTo, journeyType, setJourneyType, route, setRoute, date, setDate, time, setTime] = useContext(BusContext);
-
     const navigate = useNavigate();
 
-    const [journeyTypeInput, setJourneyTypeInput] = useState(false);
+    const [selectType, setSelectType] = useState(false);
     const [warning, setWarning] = useState(true);
-
+    const [journeyType, setJourneyType] = useState();
     const [departureType, setDepartureType] = useState(false);
     const [returnType, setReturnType] = useState(false);
+
+    const [date, setDate] = useState(null);
 
 
     const handleChange = (e) => {
         const searchType = e.target.value;
+        setJourneyType(searchType);
 
-        if (searchType === "departure") {
+        if (searchType === "Departure") {
             setReturnType(false);
             setDepartureType(true);
-            setJourneyType("Departure");
         }
-        else if (searchType === "return") {
+        else if (searchType === "Return") {
             setReturnType(true);
             setDepartureType(false);
-            setJourneyType("Return");
         };
 
         setWarning(false);
@@ -40,11 +38,11 @@ const SearchTicket = () => {
     const timeRef = useRef();
 
 
-
-    const handleAddData = (e) => {
+    const handleSearchData = (e) => {
         const from = fromRef.current.value;
         const to = toRef.current.value;
         const time = timeRef.current.value;
+        
 
         const dhanmondi = ["Dhanmondi", "Sobhanbag", "Shyamoli Square", "Technical Mor", "Majar Road Gabtoli", "Konabari Bus Stop", "Eastern Housing Rup Nogor", "Birulia Bus Stand", "Daffodil Smart City"];
         const uttara = ["Uttara - Rajlokkhi", "House building", "Grand Zomzom Tower", "Diyabari Bridge", "Beribadh", "Birulia", "Khagan", "Daffodil Smart City"];
@@ -62,51 +60,23 @@ const SearchTicket = () => {
             route = "Tongi College Gate";
         }
 
+        let dateFormate = '';
 
-        const handleFrom = {
-            from
-        };
-        setFrom(handleFrom);
+        if (date) {
+            dateFormate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+            sessionStorage.setItem('date', dateFormate);
+        }
 
-        const handleTo = {
-            to,
-        };
-        setTo(handleTo);
-
-        const handleRoute = {
-            route
-        };
-        setRoute(handleRoute);
-
-        const handleTime = {
-            time
-        };
-        setTime(handleTime);
-
-        // console.log("Data From", from);
-        // console.log("Data To", to);
-        // console.log("Data Journey Type", journeyType);
-        // console.log("Data Date", date);
-        // console.log("Data Time", time);
-
-        // fetch('http://localhost:5000/search', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(newData)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.insertedId) {
-        //             alert("Data added successfully");
-        //             e.target.reset();
-        //         }
-        //     })
+        sessionStorage.setItem('from', from);
+        sessionStorage.setItem('to', to);
+        sessionStorage.setItem('route', route);
+        sessionStorage.setItem('time', time);
+        sessionStorage.setItem('journeyType', journeyType);
 
         navigate('/searchResult');
         e.preventDefault();
     }
+
 
     return (
         <div className="section_design">
@@ -116,11 +86,11 @@ const SearchTicket = () => {
                 <nav className="nav">
                     <div className="search__type">
                         <label>Departure</label>
-                        <input type="radio" name="search_type" value="departure" onChange={handleChange} onClick={() => setJourneyTypeInput(true)} />
+                        <input type="radio" name="search_type" value="Departure" onChange={handleChange} onClick={() => setSelectType(true)} />
                     </div>
 
                     <div className="search__type">
-                        <input type="radio" name="search_type" value="return" onChange={handleChange} onClick={() => setJourneyTypeInput(true)} />
+                        <input type="radio" name="search_type" value="Return" onChange={handleChange} onClick={() => setSelectType(true)} />
                         <label>Return</label>
                     </div>
 
@@ -131,9 +101,9 @@ const SearchTicket = () => {
                 }
 
                 {
-                    journeyTypeInput &&
+                    selectType &&
 
-                    <form onSubmit={handleAddData}>
+                    <form onSubmit={handleSearchData}>
 
                         <div>
                             <label className="form-label">FROM</label>
@@ -192,7 +162,7 @@ const SearchTicket = () => {
                                 <option>11:30 AM</option>
                                 <option>12:00 PM</option>
                                 <option>03:00 PM</option>
-                                <option>03:50 PM</option>
+                                <option>03:30 PM</option>
                                 <option>04:00 PM</option>
                                 <option>04:30 PM</option>
                                 <option>05:00 PM</option>
@@ -206,7 +176,6 @@ const SearchTicket = () => {
 
                     </form>
                 }
-
             </div>
         </div>
     );

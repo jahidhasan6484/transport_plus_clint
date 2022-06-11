@@ -23,172 +23,186 @@ const AddBus = () => {
         const unavailable = 0;
         const standingTicket = 10;
 
-        const seats = [
-            {
-                seatName: 'A1',
-                available: true
-            },
-            {
-                seatName: 'A2',
-                available: true
-            },
-            {
-                seatName: 'A3',
-                available: true
-            },
-            {
-                seatName: 'A4',
-                available: true
-            },
-            {
-                seatName: 'A5',
-                available: true
-            },
-            {
-                seatName: 'A6',
-                available: true
-            },
-            {
-                seatName: 'A7',
-                available: true
-            },
-            {
-                seatName: 'A8',
-                available: true
-            },
-            {
-                seatName: 'A9',
-                available: true
-            },
-            {
-                seatName: 'A10',
-                available: true
-            },
-            {
-                seatName: 'B1',
-                available: true
-            },
-            {
-                seatName: 'B2',
-                available: true
-            },
-            {
-                seatName: 'B3',
-                available: true
-            },
-            {
-                seatName: 'B4',
-                available: true
-            },
-            {
-                seatName: 'B5',
-                available: true
-            },
-            {
-                seatName: 'B6',
-                available: true
-            },
-            {
-                seatName: 'B7',
-                available: true
-            },
-            {
-                seatName: 'B8',
-                available: true
-            },
-            {
-                seatName: 'B9',
-                available: true
-            },
-            {
-                seatName: 'B10',
-                available: true
-            },
-            {
-                seatName: 'C1',
-                available: true
-            },
-            {
-                seatName: 'C2',
-                available: true
-            },
-            {
-                seatName: 'C3',
-                available: true
-            },
-            {
-                seatName: 'C4',
-                available: true
-            },
-            {
-                seatName: 'C5',
-                available: true
-            },
-            {
-                seatName: 'C6',
-                available: true
-            },
-            {
-                seatName: 'C7',
-                available: true
-            },
-            {
-                seatName: 'C8',
-                available: true
-            },
-            {
-                seatName: 'C9',
-                available: true
-            },
-            {
-                seatName: 'C10',
-                available: true
-            },
-            {
-                seatName: 'D1',
-                available: true
-            },
-            {
-                seatName: 'D2',
-                available: true
-            },
-            {
-                seatName: 'D3',
-                available: true
-            },
-            {
-                seatName: 'D4',
-                available: true
-            },
-            {
-                seatName: 'D5',
-                available: true
-            },
-            {
-                seatName: 'D6',
-                available: true
-            },
-            {
-                seatName: 'D7',
-                available: true
-            },
-            {
-                seatName: 'D8',
-                available: true
-            },
-            {
-                seatName: 'D9',
-                available: true
-            },
-            {
-                seatName: 'D10',
-                available: true
-            }
-        ];
+      
+        // const seats = [
+        //     {
+        //         seatName: 'A1',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'A2',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'A3',
+        //         available: false
+        //     },
+        //     {
+        //         seatName: 'A4',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'A5',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'A6',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'A7',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'A8',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'A9',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'A10',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B1',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B2',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B3',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B4',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B5',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B6',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B7',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B8',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B9',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'B10',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C1',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C2',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C3',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C4',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C5',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C6',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C7',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C8',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C9',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'C10',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D1',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D2',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D3',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D4',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D5',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D6',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D7',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D8',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D9',
+        //         available: true
+        //     },
+        //     {
+        //         seatName: 'D10',
+        //         available: true
+        //     }
+        // ];
 
+        let dateFormate = '';
+
+        if (date) {
+            dateFormate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        }
+
+        const details = {
+            route, userType, busName, journeyType, startTime, date: dateFormate, totalSeat, available, unavailable, standingTicket,
+        }
 
         const newData = {
-            route, userType, busName, journeyType, startTime, date, seats, totalSeat, available, unavailable, standingTicket
+            A1: "available",
+            B1: "available",
+            C1: "available",
+            D1: "unavailable",
+            details
         };
 
         fetch('http://localhost:5000/addBus', {
@@ -203,6 +217,7 @@ const AddBus = () => {
                 if (data.insertedId) {
                     alert("Data added successfully");
                     e.target.reset();
+                    setDate(null);
                 }
             })
         e.preventDefault();
@@ -284,14 +299,6 @@ const AddBus = () => {
                             <option>05:30 PM</option>
                         </select>
                     </div>
-
-
-                    {/* <input type="text" ref={routeRef} className="form-control mb-5" placeholder='Route' />
-                    <input type="text" ref={userTypeRef} className="form-control mb-5" placeholder='User Type' />
-                    <input type="text" ref={busNameRef} className="form-control mb-5" placeholder='Bus Name' />
-                    <input type="text" ref={journeyTypeRef} className="form-control mb-5" placeholder='Journey Type' />
-                    <input type="text" ref={startTimeRef} className="form-control mb-5" placeholder='Start Time' />
-                    <input type="text" ref={dateRef} className="form-control mb-5" placeholder='Date' /> */}
 
                     <input type="submit" value="Add Data" className='btn btn-primary' />
                 </form>

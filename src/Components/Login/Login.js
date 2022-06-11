@@ -9,7 +9,7 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 import { BusContext } from "../../App";
 
 const Login = () => {
-    const [isStudent, setIsStudent, isFaculty, setIsFaculty] = useContext(BusContext);
+    // const [isStudent, setIsStudent, isFaculty, setIsFaculty] = useContext(BusContext);
 
     const [user] = useAuthState(auth);
 
@@ -43,14 +43,12 @@ const Login = () => {
         if (studentEmailPattern.test(event.target.value)) {
             setUserInfo({ ...userInfo, email: event.target.value });
             setErrors({ ...errors, emailError: "" });
-            setIsStudent(true);
-            setIsFaculty(false);
+            sessionStorage.setItem('userType', "Student");
         }
         else if (facultyEmailPattern.test(event.target.value)) {
             setUserInfo({ ...userInfo, email: event.target.value });
             setErrors({ ...errors, emailError: "" });
-            setIsFaculty(true);
-            setIsStudent(false);
+            sessionStorage.setItem('userType', "Faculty");
         }
         else {
             setErrors({ ...errors, emailError: "Please enter DIU email address" });
@@ -95,10 +93,6 @@ const Login = () => {
         }
 
     }, [user, navigate, from]);
-
-
-    console.log("Is Student:", isStudent);
-    console.log("Is Faculty:", isFaculty);
 
 
     return (

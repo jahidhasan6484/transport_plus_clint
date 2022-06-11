@@ -16,7 +16,7 @@ const Update = () => {
         const updatedName = e.target.value;
         const updatedBus = {
             ...bus,
-            busName: updatedName
+            busName: "updatedName"
         };
         setBus(updatedBus);
     }

@@ -2,6 +2,18 @@
     background: #f5f5f5;
 }
 
+.desire_buses {
+    margin-bottom: 5rem;
+}
+
+.bus {
+    margin-bottom: 1rem;
+}
+
+.bus_data {
+    text-align: center;
+}
+
 .ticket_ui {
     padding-top: 2rem;
 }
@@ -37,6 +49,7 @@
     border-radius: 7px;
     border: 2px solid green;
     background: green;
+    cursor: pointer;
 }
 
 .selected {
@@ -44,6 +57,7 @@
     border-radius: 7px;
     border: 2px solid #000;
     background: #000;
+    cursor: pointer;
 }
 
 .unavailable {
@@ -56,10 +70,10 @@
 .seat {
     margin: 10px 0px;
     transition: 0.3s;
-    cursor: pointer;
 }
 
-.seat:hover {
+.available:hover,
+.selected:hover {
     margin: 10px 0px;
     transform: scale(1.10);
 }
