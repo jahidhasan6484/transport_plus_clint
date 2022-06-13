@@ -73,28 +73,7 @@ function App() {
         }>
         </Route>
 
-        <Route path="/addBus" element={
-                  <RequireAuth>
-                    <AddBus />
-                  </RequireAuth>
-                }>
-                </Route>
-
-                <Route path="/allbus" element={
-                  <RequireAuth>
-                    <AllBus />
-                  </RequireAuth>
-                }>
-                </Route>
-
-                <Route path="/addAdmin" element={
-                  <RequireAuth>
-                    <AddAdmin />
-                  </RequireAuth>
-                }>
-                </Route>
-
-        {/* {
+        {
           admins.map(admin => <>
 
             {
@@ -125,7 +104,7 @@ function App() {
             }
 
           </>)
-        } */}
+        }
 
       </Routes>
 

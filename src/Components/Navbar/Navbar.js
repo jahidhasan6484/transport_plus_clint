@@ -52,13 +52,13 @@ const Navbar = () => {
                             </li>
                         </Link>
 
-                        {/* {
+                        {
                             admins.map(admin => <>
 
                                 {
                                     admin?.adminEmail === user?.email
                                     &&
-                                    <> */}
+                                    <>
                                         <Link to="/addBus">
                                             <li className="nav-item nav_menu">
                                                 Add Bus
@@ -75,13 +75,11 @@ const Navbar = () => {
                                             <li className="nav-item nav_menu">
                                                 Add an admin
                                             </li>
-                                        </Link>
-                                        
-                                        {/* </>
+                                        </Link></>
                                 }
 
                             </>)
-                         } */}
+                        }
 
 
 

@@ -123,3 +123,13 @@
     border-radius: 4px;
     width: 100%;
 }
+
+.search_message {
+    text-align: center;
+    letter-spacing: 5px;
+    color: red;
+}
+
+.bus_data {
+    letter-spacing: 5px;
+}
