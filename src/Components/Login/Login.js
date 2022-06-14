@@ -43,12 +43,12 @@ const Login = () => {
         if (studentEmailPattern.test(event.target.value)) {
             setUserInfo({ ...userInfo, email: event.target.value });
             setErrors({ ...errors, emailError: "" });
-            sessionStorage.setItem('userType', "Student");
+            localStorage.setItem('userType', "Student");
         }
         else if (facultyEmailPattern.test(event.target.value)) {
             setUserInfo({ ...userInfo, email: event.target.value });
             setErrors({ ...errors, emailError: "" });
-            sessionStorage.setItem('userType', "Faculty");
+            localStorage.setItem('userType', "Faculty");
         }
         else {
             setErrors({ ...errors, emailError: "Please enter DIU email address" });

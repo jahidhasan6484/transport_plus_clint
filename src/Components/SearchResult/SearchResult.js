@@ -5,6 +5,8 @@ import './SearchResult.css';
 const SearchResult = () => {
     const [buses, setBuses] = useState([]);
 
+
+
     useEffect(() => {
         fetch('http://localhost:5000/addBus')
             .then(res => res.json())
@@ -15,7 +17,7 @@ const SearchResult = () => {
                          && bus.journeyType === sessionStorage.getItem("journeyType")
                          && bus.date === sessionStorage.getItem("date")
                          && bus.startTime === sessionStorage.getItem("time")
-                         && bus.userType === sessionStorage.getItem("userType")
+                         && bus.userType === localStorage.getItem("userType")
                     );
 
                 setBuses(filterResult);

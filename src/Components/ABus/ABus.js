@@ -40,7 +40,8 @@ const ABus = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(ABus)
+            body: JSON.stringify(aBus.seats),
+            body2: JSON.stringify(aBus)
         })
             .then(res => res.json())
             .then(data => {
@@ -78,29 +79,30 @@ const ABus = () => {
                 </div>
 
                 <div className="row ticket_ui">
-                    <div className="col-md-8">
-                        <div className="seat_status">
-                            <p className="avialable_seat"> Avialable</p>
-                            <p className="selected_seat"> Selected</p>
-                            <p className="unavialable_seat"> Unavailable</p>
-                        </div>
 
-
-                        <div className="container">
-                            {
-                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
-                                    if (seat.isAvailable) {
-                                        return <div onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`}>{seat.seatName}</div>
-                                    } else {
-                                        return <div className={`seat ${index === toSelected ? "selected" : "unavailable"}`}>{seat.seatName}</div>
-                                    }
-                                })
-                            }
-                            <button className="standing_ticket_button" onClick={() => setSeat("Standing")}>Get a standing ticket</button>
-                        </div>
-
-
+                    <div className="seat_status">
+                        <p className="avialable_seat"> Avialable</p>
+                        <p className="selected_seat"> Selected</p>
+                        <p className="unavialable_seat"> Unavailable</p>
                     </div>
+
+
+
+                    <div className="col-md-8">
+                        {
+                            aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
+                                if (seat.isAvailable) {
+                                    return <div onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`}>{seat.seatName}</div>
+                                } else {
+                                    return <div className={`seat ${index === toSelected ? "selected" : "unavailable"}`}>{seat.seatName}</div>
+                                }
+                            })
+                        }
+
+
+                        <button className="standing_ticket_button" onClick={() => setSeat("Standing")}>Get a standing ticket</button>
+                    </div>
+
                     <div className="col-md-4 pt-5">
                         <div className="ticket_details">
                             <p>Bus ID: </p>
