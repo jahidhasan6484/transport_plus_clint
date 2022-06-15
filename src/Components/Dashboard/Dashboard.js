@@ -6,7 +6,7 @@ const Dashboard = () => {
         <div className="section_design dashboard">
             <div className="container">
                 <h4 className="section_title">Dashboard</h4>
-                <div className="row payment_history">
+                {/* <div className="row payment_history">
                     <div className="col-md-4">
                         <p>Payable</p>
                         <p>100</p>
@@ -19,7 +19,8 @@ const Dashboard = () => {
                         <p>Due</p>
                         <p>00</p>
                     </div>
-                </div>
+                </div> */}
+                <p className="comming">Comming Soon...</p>
             </div>
         </div>
     );
