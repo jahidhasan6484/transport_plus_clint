@@ -21,7 +21,6 @@ const AddBus = () => {
         const totalSeat = 40;
         const available = 40;
         const unavailable = 0;
-        const standingTicket = 10;
 
       
         const seats = [
@@ -35,7 +34,7 @@ const AddBus = () => {
             },
             {
                 seatName: 'A3',
-                isAvailable: false
+                isAvailable: true
             },
             {
                 seatName: 'A4',
@@ -194,7 +193,7 @@ const AddBus = () => {
         }
 
         const newData = {
-            route, userType, busName, journeyType, startTime, date: dateFormate, totalSeat, available, unavailable, standingTicket, seats
+            route, userType, busName, journeyType, startTime, date: dateFormate, totalSeat, available, unavailable, seats
         };
 
         fetch('http://localhost:5000/addBus', {

@@ -5,7 +5,7 @@ const ABus = () => {
     const { id } = useParams();
     const [aBus, setABus] = useState([]);
     const [seat, setSeat] = useState(null);
-    const [toSelected, setToSelected] = useState(null)
+    const [toSelected, setToSelected] = useState(null);
 
     useEffect(() => {
         const url = `http://localhost:5000/addBus/${id}`;
@@ -40,13 +40,13 @@ const ABus = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(aBus.seats),
-            body2: JSON.stringify(aBus)
+            body: JSON.stringify(aBus)
         })
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    alert("Seat booked successsfully");
+                    alert("Seat booked successsfully, please check dashboard for more details");
+                    window.location.reload(true);
                 }
             })
     }
@@ -55,10 +55,11 @@ const ABus = () => {
     return (
         <div className='section_design'>
             <div className='container'>
-                <h4 className='section_title'>A Bus</h4>
+                <h4 className='section_title'>Your Search Result</h4>
 
                 <div className="tab-content" id="nav-tabContent">
                     <div className="row">
+
                         <div className="col ticket_count">
                             <p>Total</p>
                             <p>{aBus.totalSeat}</p>
@@ -70,10 +71,6 @@ const ABus = () => {
                         <div className="col ticket_count">
                             <p>Unavailable</p>
                             <p>{aBus.unavailable}</p>
-                        </div>
-                        <div className="col ticket_count">
-                            <p>Standing</p>
-                            <p>{aBus.standingTicket}</p>
                         </div>
                     </div>
                 </div>
@@ -92,22 +89,17 @@ const ABus = () => {
                         {
                             aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
                                 if (seat.isAvailable) {
-                                    return <div onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`}>{seat.seatName}</div>
+                                    return <>
+                                        <div onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`}>{seat.seatName}</div>
+                                    </>
                                 } else {
                                     return <div className={`seat ${index === toSelected ? "selected" : "unavailable"}`}>{seat.seatName}</div>
                                 }
                             })
                         }
-
-
-                        <button className="standing_ticket_button" onClick={() => setSeat("Standing")}>Get a standing ticket</button>
                     </div>
 
                     <div className="col-md-4 pt-5">
-                        <div className="ticket_details">
-                            <p>Bus ID: </p>
-                            <p>{aBus._id}</p>
-                        </div>
                         <div className="ticket_details">
                             <p>Bus Name: </p>
                             <p>{aBus.busName}</p>
@@ -147,8 +139,10 @@ const ABus = () => {
                                 }
                             </p>
                         </div>
+                        {
+                            seat && <button onClick={handleUpdateTicket} className="submit_button">CONTINUE</button>
+                        }
 
-                        <button onClick={handleUpdateTicket} className="submit_button">CONTINUE</button>
 
                     </div>
                 </div>

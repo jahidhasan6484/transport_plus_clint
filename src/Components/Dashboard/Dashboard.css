@@ -1,3 +1,7 @@
 .dashboard{
     background: #dcf4ff;
 }
+
+.payment_history .col-md-4{
+    text-align: center;
+}
