@@ -1,80 +1,78 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+.navbar {
+    padding-top: 1rem;
+}
 
 .logo {
-    font-size: 1rem;
-    font-weight: 900;
+    display: flex;
+    color: red;
+    font-size: 1.25rem;
     letter-spacing: 5px;
-}
-
-.hambergur_menu {
-    color: #fff;
-    font-size: 2rem;
-    letter-spacing: 2px;
-    font-weight: 600;
-}
-
-.navbar-toggler:focus,
-.navbar-toggler:active,
-.navbar-toggler-icon:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-.navbar {
-    background: #2a2a2b;
-    color: white;
-}
-
-li {
-    list-style: none;
-}
-
-.nav_menu {
-    text-transform: capitalize;
-    padding: 0.5rem 1.25rem;
+    font-weight: 900;
     cursor: pointer;
     transition: 0.3s;
-    letter-spacing: 3px;
-    font-size: 0.7rem;
 }
 
-.user_email {
-    padding: 0.5rem 1.25rem;
+.plus {
+    font-size: 1.5rem;
+    padding-left: 5px;
+    border-radius: 50%;
     cursor: pointer;
     transition: 0.3s;
-    letter-spacing: 3px;
-    font-size: 0.7rem;
+    color: red;
 }
 
-
-a {
-    color: white;
+.logo:hover .plus {
+    transform: rotate(360deg);
 }
 
-a:hover {
-    color: white;
+.logo:hover {
+    color: red;
 }
 
-.user_icon {
-    width: 30px;
+.menu {
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    color: red;
+    border: none;
+    cursor: pointer;
+    font-weight: 900;
 }
 
-@media only screen and (max-width: 800px) {
-    .dropdown {
-        padding-top: 2rem;
+@media only screen and (max-width: 600px) {
+    .logo {
+        font-size: 0.8rem;
     }
 
-    .nav_menu:hover {
-        background: rgb(82, 81, 81);
-        border-radius: 7px;
+    .plus {
+        font-size: 0.9rem;
+    }
+
+    .menu {
+        font-size: 0.6rem;
     }
 }
 
-.signButton {
+.offcanvas-header {
+    display: flex;
+    justify-content: end;
+}
+
+.navbar-nav {
+    padding-top: 5rem;
+}
+
+.nav-item {
+    padding-top: 15px;
+}
+
+.nav-item a {
+    color: #000;
+}
+
+.dropdown {
+    padding-top: 5rem;
+}
+
+.dropdown li {
     cursor: pointer;
-    padding: 0.5rem 1.25rem;
-    cursor: pointer;
-    transition: 0.3s;
-    letter-spacing: 3px;
-    font-size: 0.7rem;
 }

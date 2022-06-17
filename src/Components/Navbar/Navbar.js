@@ -25,95 +25,80 @@ const Navbar = () => {
             .then(data => setAdmins(data));
     }, []);
 
+    console.log("Admin", admins);
+
     return (
-        <nav className="navbar navbar-expand-lg fixed-top">
-            <div className="container">
-                <Link to="/" className="logo">Transport+</Link>
-                <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <p className="hambergur_menu">...</p>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav m-auto">
-                        <Link to="/" >
-                            <li className="nav-item nav_menu">
-                                Home
-                            </li>
-                        </Link>
+        <nav class="navbar fixed-top">
+            <div class="container">
 
-                        <Link to="/getTicket">
-                            <li className="nav-item nav_menu">
-                                Get ticket
-                            </li>
-                        </Link>
+                <Link to="/" className="logo">Transport <p className='plus'>+</p></Link>
 
-                        <Link to="/dashboard">
-                            <li className="nav-item nav_menu">
-                                Dashboard
-                            </li>
-                        </Link>
+                <p className='menu' data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    menu
+                </p>
 
-                        {
-                            admins.map(admin => <>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 
-                                {
-                                    admin?.adminEmail === user?.email
-                                    &&
-                                    <>
-                                        <Link to="/addBus">
-                                            <li className="nav-item nav_menu">
-                                                Add Bus
-                                            </li>
-                                        </Link>
-
-                                        <Link to="/allBus">
-                                            <li className="nav-item nav_menu">
-                                                All Bus
-                                            </li>
-                                        </Link>
-
-                                        <Link to="/addAdmin">
-                                            <li className="nav-item nav_menu">
-                                                Add an admin
-                                            </li>
-                                        </Link></>
-                                }
-
-                            </>)
-                        }
-
-
-
-                    </ul>
-
-                    <div className="d-flex">
-                        <li className="nav-item dropdown">
-
-                            {
-                                user?.email ?
-                                    <>
-                                        <li className="nav-item user_email dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            {user?.email}
-                                        </li>
-
-                                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                            <li className="dropdown-item signButton" onClick={logout}>
-                                                Logout
-                                            </li>
-
-                                        </ul>
-                                    </>
-                                    :
-                                    <Link to="/login">
-                                        <li className="nav-item nav_menu dropdown-item signButton">
-                                            Login
-                                        </li>
-                                    </Link>
-                            }
-
-                        </li>
+                    <div class="offcanvas-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
 
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                            <li class="nav-item">
+                                <Link to='/'>Home</Link>
+                            </li>
+
+                            <li class="nav-item">
+                                <Link to="/getTicket">Get Ticket</Link>
+                            </li>
+
+                            <li class="nav-item">
+                                <Link to="/dashboard">Dashboard</Link>
+                            </li>
+
+                            {
+                                admins.map(admin => <>
+
+                                    {
+                                        admin?.adminEmail === user?.email
+                                        &&
+                                        <>
+                                            <li class="nav-item">
+                                                <Link to="/addBus">Add Bus</Link>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <Link to="/allBus">All Bus</Link>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <Link to="/addAdmin">Add an admin</Link>
+                                            </li>
+                                        </>
+                                    }
+
+                                </>)
+                            }
+
+
+                            <li class="nav-item dropdown">
+                                {
+                                    user?.email ?
+                                        <li className="dropdown-item" onClick={logout}>
+                                            Logout
+                                        </li>
+                                        :
+                                        <Link to="/login">
+                                            <li className="nav-item nav_menu dropdown-item">
+                                                Login
+                                            </li>
+                                        </Link>
+                                }
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

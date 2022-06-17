@@ -42,7 +42,7 @@ const Update = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if(data.modifiedCount > 0) {
+                if (data.modifiedCount > 0) {
                     alert("Seat booked successsfully");
                     setBus({});
                 }
@@ -55,16 +55,19 @@ const Update = () => {
         <div className="section_design">
             <div className="container">
                 <h4 className="section_title">Update</h4>
-                <p>{id}</p>
-                <p>{bus.busName}</p>
-                <p>{bus.journeyType}</p>
 
                 <form onSubmit={handleUpdateBus}>
-
-                    <input type="text" onChange={handleBusNameChange} value={bus.busName || ""}></input>
-                    <input type="text" onChange={handleJourneyTypeChange} value={bus.journeyType || ""}></input>
-
-                    <input type="submit"></input>
+                    <div>
+                        <label className="form-label">BUS NAME</label>
+                        <input className="form-control" type="text" onChange={handleBusNameChange} value={bus.busName || ""}></input>
+                    </div>
+                    <div>
+                        <label className="form-label">JOURNEY TYPE</label>
+                        <input className="form-control" type="text" onChange={handleJourneyTypeChange} value={bus.journeyType || ""}></input>
+                    </div>
+                    <div>
+                        <input type="submit" value="Save Changes" className='search_button' />
+                    </div>
                 </form>
 
             </div>

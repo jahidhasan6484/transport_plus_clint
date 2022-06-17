@@ -7,7 +7,7 @@ import Sponsors from './Components/Sponsors/Sponsors';
 import Facilities from './Components/Facilities/Facilities';
 import Navbar from './Components/Navbar/Navbar';
 import Dashboard from './Components/Dashboard/Dashboard';
-import Slider from './Components/Slider/Slider';
+import VideoBackground from './Components/VideoBackground/VideoBackground';
 import Register from './Components/Register/Register';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
 import Login from './Components/Login/Login';
@@ -38,9 +38,9 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Slider />} />
+        <Route path="/" element={<VideoBackground />} />
         <Route path="/getTicket" element={<SearchTicket />} />
-        <Route path="/facilities" element={<Facilities />} />
+        {/* <Route path="/facilities" element={<Facilities />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/addBus/update/:id" element={<Update />} />
@@ -108,7 +108,7 @@ function App() {
 
       </Routes>
 
-      <Sponsors />
+      {/* <Sponsors /> */}
     </>
 
   );

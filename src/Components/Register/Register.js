@@ -126,23 +126,10 @@ const Register = () => {
             )}
           </div>
 
-          <div className="form-check my-3">
-            <input onClick={() => setAgree(!agree)} className="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required="" />
-
-            {
-              agree ?
-                <label className="form-check-label text-success">
-                  Accept terms	&amp; condition
-                </label> :
-                <label className="form-check-label text-danger">
-                  Accept terms	&amp; condition
-                </label>
-            }
+          <div>
+            <input type="submit" value="Register" className='_button2' />
           </div>
 
-          <button className="register_button" type="submit" disabled={!agree}>
-            Register
-          </button>
           <p className="page_route">
             Already have an account? <Link to="/login" className="change_page">Please login</Link>
           </p>

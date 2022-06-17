@@ -5,8 +5,6 @@ import './SearchResult.css';
 const SearchResult = () => {
     const [buses, setBuses] = useState([]);
 
-
-
     useEffect(() => {
         fetch('http://localhost:5000/addBus')
             .then(res => res.json())
@@ -14,14 +12,13 @@ const SearchResult = () => {
                 const filterResult =
                     data.filter(bus =>
                         bus.route === sessionStorage.getItem("route")
-                         && bus.journeyType === sessionStorage.getItem("journeyType")
-                         && bus.date === sessionStorage.getItem("date")
-                         && bus.startTime === sessionStorage.getItem("time")
-                         && bus.userType === localStorage.getItem("userType")
+                        && bus.journeyType === sessionStorage.getItem("journeyType")
+                        && bus.date === sessionStorage.getItem("date")
+                        && bus.startTime === sessionStorage.getItem("time")
+                        && bus.userType === localStorage.getItem("userType")
                     );
 
                 setBuses(filterResult);
-
             });
     }, []);
 
@@ -35,83 +32,32 @@ const SearchResult = () => {
                         <p className='search_message'>There is no bus available from {sessionStorage.getItem('from')} to {sessionStorage.getItem('to')} at {sessionStorage.getItem('time')}</p>
                         :
                         <div className='desire_buses'>
-                            {
-                                buses.map(bus =>
-                                    <div class="row bus">
-                                        <div class="col bus_data">
-                                            {bus.busName}
-                                        </div>
-                                        <div class="col bus_data">
-                                            <Link to={`/searchResult/aBus/${bus._id}`}>
-                                                <button>View Seat</button>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                )
-                            }
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Bus Name</th>
+                                        <th scope="col">Available Seats</th>
+                                        <th scope="col">Options</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        buses.map(bus =>
+                                            <tr>
+                                                <th>{bus.busName}</th>
+                                                <td>{bus.available}</td>
+                                                <td>
+                                                    <Link to={`/searchResult/aBus/${bus._id}`}>
+                                                        View Seats
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                 }
-
-                {/* {
-                    showABus &&
-                    <div>
-                        {
-                            aBus.length == 0 ?
-                                <p>No bus available from {sessionStorage.getItem("from")} to {sessionStorage.getItem("to")} at {sessionStorage.getItem("time")}</p>
-                                :
-                                <>
-                                    {
-                                        aBus.map(aBus => <>
-
-                                            <div className="tab-content" id="nav-tabContent">
-                                                <div className="row">
-                                                    <div className="col ticket_count">
-                                                        <p>Total</p>
-                                                        <p>{aBus.totalSeat}</p>
-                                                    </div>
-                                                    <div className="col ticket_count">
-                                                        <p>Avialable</p>
-                                                        <p>{aBus.available}</p>
-                                                    </div>
-                                                    <div className="col ticket_count">
-                                                        <p>Unavailable</p>
-                                                        <p>{aBus.unavailable}</p>
-                                                    </div>
-                                                    <div className="col ticket_count">
-                                                        <p>Standing</p>
-                                                        <p>{aBus.standingTicket}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="row ticket_ui">
-                                                <div className="col-md-8">
-                                                    <div className="seat_status">
-                                                        <p className="avialable_seat"> Avialable</p>
-                                                        <p className="selected_seat"> Selected</p>
-                                                        <p className="unavialable_seat"> Unavailable</p>
-                                                    </div>
-                                                    
-
-
-
-
-                                        </>)
-                                    }
-                                </>
-                        }
-                    </div>
-                } */}
-
-
-
-
-
-
-
-
-
-
             </div>
         </div>
     );

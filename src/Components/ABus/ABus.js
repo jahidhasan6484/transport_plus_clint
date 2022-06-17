@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './ABus.css';
 import { useParams } from "react-router-dom";
 
 const ABus = () => {
@@ -33,33 +34,37 @@ const ABus = () => {
 
 
     const handleUpdateTicket = () => {
-        const url = `http://localhost:5000/updateTicket/${id}`;
 
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(aBus)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    alert("Seat booked successsfully, please check dashboard for more details");
-                    window.location.reload(true);
-                }
+        if (seat === null) {
+            alert("Please select an available ticket");
+        }
+        else {
+            const url = `http://localhost:5000/updateTicket/${id}`;
+
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(aBus)
             })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        alert("Seat booked successsfully, please check dashboard for more details");
+                        window.location.reload(true);
+                    }
+                })
+        }
     }
 
 
     return (
         <div className='section_design'>
             <div className='container'>
-                <h4 className='section_title'>Your Search Result</h4>
-
+            <h4 className="section_title">{aBus.busName}</h4>
                 <div className="tab-content" id="nav-tabContent">
                     <div className="row">
-
                         <div className="col ticket_count">
                             <p>Total</p>
                             <p>{aBus.totalSeat}</p>
@@ -85,18 +90,143 @@ const ABus = () => {
 
 
 
-                    <div className="col-md-8">
-                        {
-                            aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
-                                if (seat.isAvailable) {
-                                    return <>
-                                        <div onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`}>{seat.seatName}</div>
-                                    </>
-                                } else {
-                                    return <div className={`seat ${index === toSelected ? "selected" : "unavailable"}`}>{seat.seatName}</div>
-                                }
-                            })
-                        }
+                    <div className="col-md-8 aBusAllSeats">
+                        <div className="seats">
+                            <div>
+                                <div className="coloum_name">A
+
+                                    {
+                                        aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
+
+                                            if (index < 10 && seat.isAvailable === true) {
+                                                return <>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <button onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</button>
+                                                    </div>
+
+                                                </>
+                                            } else if (index < 10 && seat.isAvailable === false) {
+                                                return <>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <button className={`seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</button>
+                                                    </div>
+                                                </>
+                                            }
+                                        })
+                                    }
+                                </div>
+                            </div>
+                            <div>
+                                <div className="coloum_name">B
+
+                                    {
+                                        aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
+
+                                            if (index >= 10 && index < 20 && seat.isAvailable === true) {
+                                                return <>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <button onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</button>
+                                                    </div>
+
+                                                </>
+                                            } else if (index >= 10 && index < 20 && seat.isAvailable === false) {
+                                                return <>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <button className={`seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</button>
+                                                    </div>
+                                                </>
+                                            }
+                                        })
+                                    }
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="coloum_name">CN</div>
+                                <div className="seat_number">
+                                    <button className="seat">1</button>
+                                </div>
+                                <div className="seat_number">
+                                    <button className="seat">2</button>
+                                </div>
+                                <div className="seat_number">
+                                    <button className="seat">3</button>
+                                </div>
+                                <div className="seat_number">
+                                    <button className="seat">4</button>
+                                </div>
+                                <div className="seat_number">
+                                    <button className="seat">5</button>
+                                </div>
+                                <div className="seat_number">
+                                    <button className="seat">6</button>
+                                </div>
+                                <div className="seat_number">
+                                    <button className="seat">7</button>
+                                </div>
+                                <div className="seat_number">
+                                    <button className="seat">8</button>
+                                </div>
+                                <div className="seat_number">
+                                    <button className="seat">9</button>
+                                </div>
+                                <div className="seat_number">
+                                    <button className="seat">10</button>
+                                </div>
+
+
+                            </div>
+                            <div>
+                                <div className="coloum_name">C
+
+                                    {
+                                        aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
+
+                                            if (index >= 20 && index < 30 && seat.isAvailable === true) {
+                                                return <>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <button onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</button>
+                                                    </div>
+
+                                                </>
+                                            } else if (index >= 20 && index < 30 && seat.isAvailable === false) {
+                                                return <>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <button className={`seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</button>
+                                                    </div>
+                                                </>
+                                            }
+                                        })
+                                    }
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="coloum_name">D
+
+                                    {
+                                        aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
+
+                                            if (index >= 30 && index < 40 && seat.isAvailable === true) {
+                                                return <>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <button onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</button>
+                                                    </div>
+
+                                                </>
+                                            } else if (index >= 30 && index < 40 && seat.isAvailable === false) {
+                                                return <>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <button className={`seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</button>
+                                                    </div>
+                                                </>
+                                            }
+                                        })
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
                     <div className="col-md-4 pt-5">
@@ -140,7 +270,7 @@ const ABus = () => {
                             </p>
                         </div>
                         {
-                            seat && <button onClick={handleUpdateTicket} className="submit_button">CONTINUE</button>
+                            <button onClick={handleUpdateTicket} className="_button continue_button">CONTINUE</button>
                         }
 
 

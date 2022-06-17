@@ -22,7 +22,7 @@ const AddBus = () => {
         const available = 40;
         const unavailable = 0;
 
-      
+
         const seats = [
             {
                 seatName: 'A1',
@@ -291,7 +291,9 @@ const AddBus = () => {
                         </select>
                     </div>
 
-                    <input type="submit" value="Add Data" className='btn btn-primary' />
+                    <div>
+                        <input type="submit" value="Add Bus" className='_button' />
+                    </div>
                 </form>
             </div>
         </div>

@@ -12,7 +12,7 @@ const AllBus = () => {
 
     //DELETE DATA
     const handleDeleteData = id => {
-        const proceed = window.confirm("Want to delete?");
+        const proceed = window.confirm("Do you really want to delete?");
         if (proceed) {
             const url = `http://localhost:5000/addBus/${id}`;
             fetch(url, {
@@ -30,21 +30,55 @@ const AllBus = () => {
     }
 
     return (
-        <div className="section_design">
+        <div className="section_design allBus">
             <div className="container">
                 <h4 className="section_title">All Bus</h4>
 
-                {
-                    buses.map(bus => <>
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Bus Name</th>
+                            <th scope="col">Journey Type</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Start Time</th>
+                            <th scope="col">User Type</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                        <p>Name: {bus.route} Start Time: {bus.startTime} <button onClick={() => handleDeleteData(bus._id)}>X</button>
-                            <Link to={`/addBus/update/${bus._id}`}>
-                                <button>Update</button>
-                            </Link>
-                        </p>
+                        {
+                            buses.map(bus => <>
+                                <tr>
+                                    <td>{bus.busName}</td>
+                                    <td>{bus.journeyType}</td>
+                                    <td>{bus.date}</td>
+                                    <td>{bus.startTime}</td>
+                                    <td>{bus.userType}</td>
+                                    <td onClick={() => handleDeleteData(bus._id)} className="delete">Delete</td>
 
-                    </>)
-                }
+                                    <td>
+                                        <Link to={`/addBus/update/${bus._id}`}>
+                                            Edit
+                                        </Link>
+                                    </td>
+
+                                </tr>
+                                {/* <p>Name: {bus.route} Start Time: {bus.startTime} <button onClick={() => handleDeleteData(bus._id)}>X</button>
+                                        <Link to={`/addBus/update/${bus._id}`}>
+                                            <button>Update</button>
+                                        </Link>
+                                    </p> */}
+
+                            </>)
+                        }
+
+
+
+
+                    </tbody>
+                </table>
 
 
 

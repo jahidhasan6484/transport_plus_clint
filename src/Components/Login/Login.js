@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import auth from '../../firebase.init';
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -6,10 +6,8 @@ import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hook
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingPage from "../LoadingPage/LoadingPage";
-import { BusContext } from "../../App";
 
 const Login = () => {
-    // const [isStudent, setIsStudent, isFaculty, setIsFaculty] = useContext(BusContext);
 
     const [user] = useAuthState(auth);
 
@@ -121,24 +119,10 @@ const Login = () => {
                         )}
                     </div>
 
-
-                    <div className="form-check my-3">
-                        <input onClick={() => setAgree(!agree)} className="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required="" />
-
-                        {
-                            agree ?
-                                <label className="form-check-label text-success">
-                                    Accept terms	&amp; condition
-                                </label> :
-                                <label className="form-check-label text-danger">
-                                    Accept terms	&amp; condition
-                                </label>
-                        }
+                    <div>
+                        <input type="submit" value="Login" className='_button2' />
                     </div>
 
-                    <button className="login_button" type="submit" disabled={!agree}>
-                        Login
-                    </button>
                     <p className="page_route">
                         Don't have an account?
                         <Link to="/register" className="change_page">Register yourself</Link>

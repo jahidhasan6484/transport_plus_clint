@@ -9,7 +9,8 @@ a {
 }
 
 .section_design {
-    padding: 7rem 0;
+    height: 100vh;
+    padding: 10rem 0;
 }
 
 .section_title {
@@ -17,8 +18,12 @@ a {
     text-transform: uppercase;
     margin-bottom: 5rem;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.25rem;
     letter-spacing: 10px;
+}
+
+label {
+    padding-top: 1rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -84,5 +89,49 @@ a {
 }
 
 .form-check-label {
+    font-size: 0.8rem;
+}
+
+
+._button {
+    margin-top: 1rem;
+    padding: 5px 50px;
+    border: 1px solid #d3d3d3;
+    background: none;
+    color: #000;
+    border-radius: 5px;
+    letter-spacing: 2px;
+}
+
+._button2 {
+    margin-top: 1rem;
+    padding: 9px 50px;
+    border: 1px solid #d3d3d3;
+    background: none;
+    color: #000;
+    border-radius: 5px;
+    letter-spacing: 2px;
+}
+
+.continue_button{
+    width: 100%;
+}
+
+.delete {
+    color: red;
+    cursor: pointer;
+}
+
+table {
+    text-align: center;
+}
+
+.warning2 {
+    color: red;
+    letter-spacing: 2px;
     font-size: 0.9rem;
+}
+
+.allBus {
+    background: #dcf4ff;
 }
