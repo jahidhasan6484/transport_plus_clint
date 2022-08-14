@@ -1,0 +1,35 @@
+.infoLabel {
+    color: #fff;
+}
+
+.infoData {
+    background: #0b0f16;
+    color: #fff;
+    opacity: 0.5;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+.infoData2 {
+    background: #0b0f16;
+    color: #fff;
+    opacity: 0.5;
+    padding-top: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.profileImage {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.profileImage img {
+    width: 200px;
+    color: #fff;
+}

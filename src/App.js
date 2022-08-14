@@ -19,6 +19,9 @@ import AddAdmin from './Components/AddAdmin/AddAdmin';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase.init';
 import ABus from './Components/ABus/ABus';
+import Verified from './Components/Verified/Verified';
+import Home from './Components/Home/Home';
+import Profile from './Components/Profile/Profile';
 
 
 function App() {
@@ -35,11 +38,12 @@ function App() {
 
   return (
     <>
-      <Navbar />
 
+      <Navbar />
       <Routes>
-        <Route path="/" element={<VideoBackground />} />
-        <Route path="/getTicket" element={<SearchTicket />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/verified" element={<Verified />} />
+        <Route path="/bookTicket" element={<SearchTicket />} />
         {/* <Route path="/facilities" element={<Facilities />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -59,21 +63,59 @@ function App() {
         }>
         </Route>
 
-        <Route path="/payment" element={
+        {/* <Route path="/payment" element={
           <RequireAuth>
             <Payment />
           </RequireAuth>
         }>
-        </Route>
+        </Route> */}
 
         <Route path="/dashboard" element={
           <RequireAuth>
-            <Dashboard />
+            <Dashboard >
+            </Dashboard>
+
+
+
           </RequireAuth>
+
+
         }>
+          <Route path="profile" element={<Profile />}>
+          </Route>
+          <Route path="addBus" element={
+
+            <AddBus />
+
+          }>
+          </Route>
+          <Route path="allbus" element={<AllBus />}>
+          </Route>
+          <Route path="addAdmin" element={<AddAdmin />}>
+          </Route>
+          {
+            admins.map(admin => <>
+              {
+                admin?.adminEmail === user?.email
+                && <>
+                  <Route path="addBus" element={
+
+                    <AddBus />
+
+                  }>
+                  </Route>
+                  <Route path="allbus" element={<AllBus />}>
+                  </Route>
+                  <Route path="addAdmin" element={<AddAdmin />}>
+                  </Route>
+                </>
+              }
+            </>)
+          }
+
         </Route>
 
-        {
+        {/* {
           admins.map(admin => <>
 
             {
@@ -104,11 +146,11 @@ function App() {
             }
 
           </>)
-        }
+        } */}
 
       </Routes>
 
-      {/* <Sponsors /> */}
+
     </>
 
   );

@@ -1,8 +1,18 @@
-.dashboard{
-    background: #dcf4ff;
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10rem;
+    border-right: 1px solid #1e293b;
 }
 
-.comming {
-    text-align: center;
-    letter-spacing: 15px;
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 3px;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+    color: aqua;
 }

@@ -4,10 +4,10 @@ const Options = () => {
     return (
         <>
             <option selected="" disabled="" value="">Select...</option>
-            <option>Dhanmondi</option>
-            <option>Sobhanbag</option>
+            {/* <option>Dhanmondi</option>
+            <option>Sobhanbag</option> */}
             <option>Shyamoli Square</option>
-            <option>Technical Mor</option>
+            {/* <option>Technical Mor</option>
             <option>Majar Road Gabtoli</option>
             <option>Konabari Bus Stop</option>
             <option>Eastern Housing Rup Nogor</option>
@@ -21,7 +21,7 @@ const Options = () => {
             <option>Khagan </option>
             <option>Tongi College Gate Bus Stand</option>
             <option>Kamar Para</option>
-            <option>Dhour</option>
+            <option>Dhour</option> */}
         </>
     );
 };

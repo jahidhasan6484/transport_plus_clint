@@ -1,4 +1,4 @@
-.search_result {
+/* .search_result {
     background: #f5f5f5;
 }
 
@@ -119,4 +119,38 @@
 
 .bus_data {
     letter-spacing: 5px;
+} */
+
+
+/* Here  */
+
+.ticket_interface .row{
+    padding: 0 10px;
+}
+
+.a_seat {
+    border-radius: 5px;
+    /* color: #000; */
+    cursor: pointer;
+}
+
+.col {
+    margin: 5px 1px;
+    padding: 0.5rem 0;
+    text-align: center;
+}
+
+.selected{
+    background: black;
+    color: white;
+}
+
+.unavailable {
+    color: white;
+    background: red;
+}
+
+.available {
+    color: White;
+    background: green;
 }

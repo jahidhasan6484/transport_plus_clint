@@ -56,25 +56,22 @@ const AddAdmin = () => {
     }
 
     return (
-        <div className="section_design">
             <div className="container">
-                <h4 className="section_title">Add an Admin</h4>
-
+            <h4 className="section_title">এড <span className="highlight">এডমিন</span></h4>
 
                 <form onSubmit={handleAddAdmin}>
                     <div>
                         <label>Add new admin email</label>
-                        <input ref={adminEmailRef} type="email" className='form-control'></input>
+                        <input ref={adminEmailRef} type="email" className='form-control input_box'></input>
                     </div>
 
-                    <p className="warning2 pt-2">an admin can access all of the function!</p>
+                    <p className="text-warning">an admin can access all of the function!</p>
 
                     <div>
-                        <input type="submit" className='_button'></input>
+                        <input type="submit" className='btn btn-dark'></input>
                     </div>
                 </form>
             </div>
-        </div>
     );
 };
 

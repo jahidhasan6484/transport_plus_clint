@@ -1,7 +1,51 @@
 /* .login {
     height: 70vh;
 } */
-.form-check {
+/* .form-check {
     display: flex;
     align-items: center;
+} */
+
+/* .form-floating,
+.form_label,
+input,
+form {
+    background: transparent;
+}
+
+.form_label {
+    color: #fff;
+    padding-bottom: 0.5rem;
+} */
+
+form .input_box {
+    background: transparent;
+    color: #fff;
+}
+
+form .input_box:focus {
+    background: transparent;
+    color: #fff;
+}
+
+form select {
+    background: transparent;
+}
+
+.error_message {
+    color: #fff;
+    opacity: 0.4;
+}
+
+.page_route {
+    color: #fff;
+}
+
+.change_page{
+    color: aqua;
+    padding-left: 1rem;
+}
+
+.change_page:hover{
+    color: aqua;
 }

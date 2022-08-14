@@ -1,4 +1,5 @@
-/* .register {
-    background: #fff;
-    height: 70vh;
-} */
+.form_area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

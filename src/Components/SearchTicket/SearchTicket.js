@@ -3,6 +3,8 @@ import './SearchTicket.css';
 import Options from "./Options";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+// import './date-picker.component.bootstrap.css';
 import addDays from 'date-fns/addDays';
 import { useNavigate } from "react-router-dom";
 
@@ -80,9 +82,9 @@ const SearchTicket = () => {
 
 
     return (
-        <div className="section_design searchTicket">
+        <div className="section searchTicket" id="bookTicket">
             <div className="container">
-                <h4 className="section_title">Search Ticket</h4>
+                <h4 className="section_title">সার্চ <span className="highlight">টিকিট</span></h4>
 
                 <div>
                     <nav className="nav">
@@ -99,63 +101,67 @@ const SearchTicket = () => {
                     </nav>
                     {
                         warning &&
-                        <p className="warning">please select the type of ticket you want first!</p>
+                        <p className="warning">দয়া করে প্রথমে জার্নি টাইপ সিলেক্ট করুন</p>
                     }
 
                     {
                         selectType &&
 
                         <form onSubmit={handleSearchData}>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <label className="form-label">FROM</label>
+                                    {
+                                        returnType ?
+                                            <select ref={fromRef} className="form-select" required>
+                                                <option selected="" >Daffodil Smart City</option>
+                                            </select>
+                                            :
+                                            <select ref={fromRef} className="form-select" required>
+                                                <Options />
+                                            </select>
+                                    }
+                                </div>
 
-                            <div>
-                                <label className="form-label">FROM</label>
-                                {
-                                    returnType ?
-                                        <select ref={fromRef} className="form-select" required>
-                                            <option selected="" >Daffodil Smart City</option>
-                                        </select>
-                                        :
-                                        <select ref={fromRef} className="form-select" required>
-                                            <Options />
-                                        </select>
-                                }
-                            </div>
 
+                                <div className="col-md-6">
+                                    <label className="form-label">TO</label>
+                                    {
+                                        departureType ?
+                                            <select ref={toRef} className="form-select" required>
+                                                <option selected="" >Daffodil Smart City</option>
+                                            </select>
+                                            :
+                                            <select ref={toRef} className="form-select" required>
+                                                <Options />
+                                            </select>
+                                    }
+                                </div>
 
-                            <div>
-                                <label className="form-label">TO</label>
-                                {
-                                    departureType ?
-                                        <select ref={toRef} className="form-select" required>
-                                            <option selected="" >Daffodil Smart City</option>
-                                        </select>
-                                        :
-                                        <select ref={toRef} className="form-select" required>
-                                            <Options />
-                                        </select>
-                                }
-                            </div>
+                                <div className="col-md-6">
+                                    <label className="form-label">DATE</label>
 
-                            <div>
-                                <label className="form-label">DATE</label>
+                                    <DatePicker className="form-select"
+                                        selected={date}
+                                        onChange={(e) => setDate(e)}
+                                        minDate={new Date()}
+                                        maxDate={addDays(new Date(), 4)}
+                                        dateFormat="MMMM d, yyyy"
+                                        placeholderText="June 11, 2022"
+                                        required
+                                    />
 
-                                <DatePicker className="form-select"
-                                    selected={date}
-                                    onChange={(e) => setDate(e)}
-                                    minDate={new Date()}
-                                    maxDate={addDays(new Date(), 4)}
-                                    dateFormat="MMMM d, yyyy"
-                                    placeholderText="June 11, 2022"
-                                    required
-                                />
+                                </div>
 
-                            </div>
-
-                            <div>
-                                <label className="form-label">TIME</label>
-                                <select ref={timeRef} className="form-select" required>
-                                    <option selected="" disabled="" value="">Select...</option>
-                                    <option>08:30 AM</option>
+                                <div className="col-md-6">
+                                    <label className="form-label">TIME</label>
+                                    <select ref={timeRef} className="form-select" required>
+                                        <option selected="" disabled="" value="">Select...</option>
+                                        <option>07:00 AM</option>
+                                        {/* <option>04:00 PM</option> */}
+                                        <option>04:20 PM</option>
+                                        {/* <option>04:30 PM</option> */}
+                                        {/* <option>08:30 AM</option>
                                     <option>09:00 AM</option>
                                     <option>09:30 AM</option>
                                     <option>10:00 AM</option>
@@ -168,13 +174,17 @@ const SearchTicket = () => {
                                     <option>04:00 PM</option>
                                     <option>04:30 PM</option>
                                     <option>05:00 PM</option>
-                                    <option>05:30 PM</option>
-                                </select>
+                                    <option>05:30 PM</option> */}
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <input type="submit" value="সার্চ" className='btn btn-dark' />
+
+                                    {/* <button type="button" class="btn btn-light">কন্টাক্ট</button> */}
+                                </div>
                             </div>
 
-                            <div>
-                                <input type="submit" value="Search" className='_button' />
-                            </div>
 
                         </form>
                     }

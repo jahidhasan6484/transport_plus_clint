@@ -5,6 +5,8 @@ import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
+import Home from '../Home/Home';
+import SearchTicket from '../SearchTicket/SearchTicket';
 
 
 const Navbar = () => {
@@ -25,79 +27,36 @@ const Navbar = () => {
             .then(data => setAdmins(data));
     }, []);
 
-    console.log("Admin", admins);
 
     return (
-        <nav class="navbar fixed-top">
+        <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container">
+                <Link class="logo pt-2" to="/">ট্রান্সপোর্ট প্লাস</Link>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                        <Link class="nav_menu" to="/">হোম</Link>
+                        <Link class="nav_menu" to="/bookTicket">বুক টিকিট</Link>
+                        <Link class="nav_menu" to="/dashboard">ড্যাশবোর্ড</Link>
+                    </ul>
+                    <div class="buttons">
+                        {
+                            user?.email ?
+                                <Link to="/login">
+                                    <button type="button" class="btn btn-light" onClick={logout}>লগআউট</button>
+                                </Link>
+                                :
 
-                <Link to="/" className="logo">Transport <p className='plus'>+</p></Link>
+                                <Link to="/login">
+                                    <button type="button" class="btn btn-light">লগইন</button>
+                                </Link>
+                        }
+                        <Link to="/register">
+                            <button type="button" class="btn btn-dark">রেজিষ্টার</button>
+                        </Link>
 
-                <p className='menu' data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    menu
-                </p>
-
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-
-                    <div class="offcanvas-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-
-                            <li class="nav-item">
-                                <Link to='/'>Home</Link>
-                            </li>
-
-                            <li class="nav-item">
-                                <Link to="/getTicket">Get Ticket</Link>
-                            </li>
-
-                            <li class="nav-item">
-                                <Link to="/dashboard">Dashboard</Link>
-                            </li>
-
-                            {
-                                admins.map(admin => <>
-
-                                    {
-                                        admin?.adminEmail === user?.email
-                                        &&
-                                        <>
-                                            <li class="nav-item">
-                                                <Link to="/addBus">Add Bus</Link>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <Link to="/allBus">All Bus</Link>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <Link to="/addAdmin">Add an admin</Link>
-                                            </li>
-                                        </>
-                                    }
-
-                                </>)
-                            }
-
-
-                            <li class="nav-item dropdown">
-                                {
-                                    user?.email ?
-                                        <li className="dropdown-item" onClick={logout}>
-                                            Logout
-                                        </li>
-                                        :
-                                        <Link to="/login">
-                                            <li className="nav-item nav_menu dropdown-item">
-                                                Login
-                                            </li>
-                                        </Link>
-                                }
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>

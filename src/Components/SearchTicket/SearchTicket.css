@@ -1,7 +1,47 @@
-.searchTicket {
-   
+.form-select {
+    background-color: transparent;
+    color: #d4d4d4;
 }
 
+option{
+    background-color: #1e293b;
+}
+
+
+.nav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    letter-spacing: 2px;
+}
+
+.search__type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.warning {
+    color: red;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+label{
+    color: #fff;
+}
+
+form {
+    margin-top: 3rem;
+}
+
+form div {
+    margin-bottom: 1rem;
+}
+
+
+/* 
 .nav {
     display: flex;
     justify-content: space-evenly;
@@ -38,4 +78,4 @@
 
 .form-select {
     letter-spacing: 1px;
-}
+} */

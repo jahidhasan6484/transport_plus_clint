@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
 import './ABus.css';
 import { useParams } from "react-router-dom";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+
+import auth from '../../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
 
 const ABus = () => {
+
+    const [user] = useAuthState(auth);
+
+    console.log(user.email, "USER HERE");
     const { id } = useParams();
     const [aBus, setABus] = useState([]);
     const [seat, setSeat] = useState(null);
@@ -15,20 +25,36 @@ const ABus = () => {
             .then(data => setABus(data))
     }, []);
 
-    const handleTicketSelect = (seatNumber, index) => {
+    const [userTicket, setUserTicket] = useState({
+        user: "",
+        seatName: "",
+        busName: "",
+        date: ""
+    })
+
+    console.log("userTicket0000:", userTicket)
+
+    const handleTicketSelect = (seatNumber, index, user) => {
         setSeat(seatNumber);
 
         const setSelected = () => {
             let bus = { ...aBus }
+            let userNewTicket = {...userTicket}
             if (toSelected != null) {
                 console.log("To selected Value :", bus.seats[toSelected])
                 bus.seats[toSelected].isAvailable = true;
             }
             bus.seats[index].isAvailable = false;
+            bus.seats[index].owner = `${user.email}`;
+            userNewTicket.user = `${user.email}`;
+            userNewTicket.seatName = bus.seats[index].seatName;
+            userNewTicket.busName = bus.busName;
+            userNewTicket.date = bus.date;
+            
+            setUserTicket(userNewTicket);
             setToSelected(index);
-            return bus
+            return bus;
         }
-
         setABus(setSelected());
     }
 
@@ -40,29 +66,51 @@ const ABus = () => {
         }
         else {
             const url = `http://localhost:5000/updateTicket/${id}`;
+            const url2 = "http://localhost:5000/updateUserTicketCollection";
 
-            fetch(url, {
-                method: 'PUT',
+            fetch(url2, {
+                method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify(aBus)
+                body: JSON.stringify(userTicket)
             })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.modifiedCount > 0) {
-                        alert("Seat booked successsfully, please check dashboard for more details");
-                        window.location.reload(true);
-                    }
+                // .then(res => res.json())
+                // .then(data => {
+                //     if (data.insertedId) {
+                //         alert("Data added successfully");
+                //     }
+                // })
+
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(aBus)
                 })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount > 0) {
+                            alert("Seat booked successsfully, please check dashboard for more details");
+                            window.location.reload(true);
+                        }
+                    })
         }
     }
+
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+            {props}
+            
+        </Tooltip>
+    );
 
 
     return (
         <div className='section_design'>
             <div className='container'>
-            <h4 className="section_title">{aBus.busName}</h4>
+                <h4 className="section_title">{aBus.busName}</h4>
                 <div className="tab-content" id="nav-tabContent">
                     <div className="row">
                         <div className="col ticket_count">
@@ -89,143 +137,272 @@ const ABus = () => {
                     </div>
 
 
+                    <div className="col-md-8 ticket_interface">
+                        <div className="row">
+                        {
+                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
 
-                    <div className="col-md-8 aBusAllSeats">
-                        <div className="seats">
-                            <div>
-                                <div className="coloum_name">A
-
-                                    {
-                                        aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
-
-                                            if (index < 10 && seat.isAvailable === true) {
-                                                return <>
-                                                    <div className="col-md-3 col-sm-3">
-                                                        <button onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</button>
-                                                    </div>
-
-                                                </>
-                                            } else if (index < 10 && seat.isAvailable === false) {
-                                                return <>
-                                                    <div className="col-md-3 col-sm-3">
-                                                        <button className={`seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</button>
-                                                    </div>
-                                                </>
-                                            }
-                                        })
+                                    if (index >=0 && index <= 5 && seat.seatName == 'S0') {
+                                        return (
+                                            <div className="col"></div>
+                                        )
+                                    } else if (index >=0 && index <= 5 && seat.seatName == 'Driver') {
+                                        return (
+                                            <div className="col">Driver</div>
+                                        )
+                                    } else if (index >=0 && index <= 5 && seat.isAvailable == true) {
+                                        return (
+                                            <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
+                                        )
+                                    } else if (index >=0 && index <= 5 && seat.isAvailable == false) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
                                     }
-                                </div>
-                            </div>
-                            <div>
-                                <div className="coloum_name">B
+                                })
+                            }
+                        </div>
+                       
+                        <div className="row mt-5">
+                            {
+                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
 
-                                    {
-                                        aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
-
-                                            if (index >= 10 && index < 20 && seat.isAvailable === true) {
-                                                return <>
-                                                    <div className="col-md-3 col-sm-3">
-                                                        <button onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</button>
-                                                    </div>
-
-                                                </>
-                                            } else if (index >= 10 && index < 20 && seat.isAvailable === false) {
-                                                return <>
-                                                    <div className="col-md-3 col-sm-3">
-                                                        <button className={`seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</button>
-                                                    </div>
-                                                </>
-                                            }
-                                        })
+                                    if (index >= 6 && index <= 11 && seat.seatName == 'S1') {
+                                        return (
+                                            <div className="col"></div>
+                                        )
+                                    } else if (index >= 6 && index <= 11 && seat.seatName == '1') {
+                                        return (
+                                            <div className="col">{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 6 && index <= 11 && seat.isAvailable == true) {
+                                        return (
+                                            <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 6 && index <= 11 && seat.isAvailable == false) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
                                     }
-                                </div>
-                            </div>
+                                })
+                            }
+                        </div>
+                        <div className="row">
+                            {
+                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
 
-                            <div>
-                                <div className="coloum_name">CN</div>
-                                <div className="seat_number">
-                                    <button className="seat">1</button>
-                                </div>
-                                <div className="seat_number">
-                                    <button className="seat">2</button>
-                                </div>
-                                <div className="seat_number">
-                                    <button className="seat">3</button>
-                                </div>
-                                <div className="seat_number">
-                                    <button className="seat">4</button>
-                                </div>
-                                <div className="seat_number">
-                                    <button className="seat">5</button>
-                                </div>
-                                <div className="seat_number">
-                                    <button className="seat">6</button>
-                                </div>
-                                <div className="seat_number">
-                                    <button className="seat">7</button>
-                                </div>
-                                <div className="seat_number">
-                                    <button className="seat">8</button>
-                                </div>
-                                <div className="seat_number">
-                                    <button className="seat">9</button>
-                                </div>
-                                <div className="seat_number">
-                                    <button className="seat">10</button>
-                                </div>
-
-
-                            </div>
-                            <div>
-                                <div className="coloum_name">C
-
-                                    {
-                                        aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
-
-                                            if (index >= 20 && index < 30 && seat.isAvailable === true) {
-                                                return <>
-                                                    <div className="col-md-3 col-sm-3">
-                                                        <button onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</button>
-                                                    </div>
-
-                                                </>
-                                            } else if (index >= 20 && index < 30 && seat.isAvailable === false) {
-                                                return <>
-                                                    <div className="col-md-3 col-sm-3">
-                                                        <button className={`seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</button>
-                                                    </div>
-                                                </>
-                                            }
-                                        })
+                                    if (index >= 12 && index <= 17 && seat.seatName == 'S2') {
+                                        return (
+                                            <div className="col"></div>
+                                        )
+                                    } else if (index >= 12 && index <= 17 && seat.seatName == '2') {
+                                        return (
+                                            <div className="col">{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 12 && index <= 17 && seat.isAvailable == true) {
+                                        return (
+                                            <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 12 && index <= 17 && seat.isAvailable == false) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
                                     }
-                                </div>
-                            </div>
+                                })
+                            }
+                        </div>
+                        <div className="row">
+                            {
+                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
 
-                            <div>
-                                <div className="coloum_name">D
-
-                                    {
-                                        aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
-
-                                            if (index >= 30 && index < 40 && seat.isAvailable === true) {
-                                                return <>
-                                                    <div className="col-md-3 col-sm-3">
-                                                        <button onClick={() => handleTicketSelect(seat.seatName, index)} className={`seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</button>
-                                                    </div>
-
-                                                </>
-                                            } else if (index >= 30 && index < 40 && seat.isAvailable === false) {
-                                                return <>
-                                                    <div className="col-md-3 col-sm-3">
-                                                        <button className={`seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</button>
-                                                    </div>
-                                                </>
-                                            }
-                                        })
+                                    if (index >= 18 && index <= 23 && seat.seatName == 'S3') {
+                                        return (
+                                            <div className="col"></div>
+                                        )
+                                    } else if (index >= 18 && index <= 23 && seat.seatName == '3') {
+                                        return (
+                                            <div className="col">{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 18 && index <= 23 && seat.isAvailable == true) {
+                                        return (
+                                            <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 18 && index <= 23 && seat.isAvailable == false) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
                                     }
-                                </div>
-                            </div>
+                                })
+                            }
+                        </div>
+                        <div className="row">
+                            {
+                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
 
+                                    if (index >= 24 && index <= 29 && seat.seatName == 'S4') {
+                                        return (
+                                            <div className="col"></div>
+                                        )
+                                    } else if (index >= 24 && index <= 29 && seat.seatName == '4') {
+                                        return (
+                                            <div className="col">{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 24 && index <= 29 && seat.isAvailable == true) {
+                                        return (
+                                            <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 24 && index <= 29 && seat.isAvailable == false) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    }
+                                })
+                            }
+                        </div>
+
+                        <div className="row">
+                            {
+                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
+
+                                    if (index >= 30 && index <= 35 && seat.seatName == 'S5') {
+                                        return (
+                                            <div className="col"></div>
+                                        )
+                                    } else if (index >= 30 && index <= 35 && seat.seatName == '5') {
+                                        return (
+                                            <div className="col">{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 30 && index <= 35 && seat.isAvailable == true) {
+                                        return (
+                                            <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 30 && index <= 35 && seat.isAvailable == false) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    }
+                                })
+                            }
+                        </div>
+                        <div className="row">
+                            {
+                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
+
+                                    if (index >= 36 && index <= 41 && seat.seatName == 'S6') {
+                                        return (
+                                            <div className="col"></div>
+                                        )
+                                    } else if (index >= 36 && index <= 41 && seat.seatName == '6') {
+                                        return (
+                                            <div className="col">{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 36 && index <= 41 && seat.isAvailable == true) {
+                                        return (
+                                            <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 36 && index <= 41 && seat.isAvailable == false) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    }
+                                })
+                            }
+                        </div>
+
+                        <div className="row">
+                            {
+                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
+
+                                    if (index >= 42 && index <= 47 && seat.seatName == 'S7') {
+                                        return (
+                                            <div className="col"></div>
+                                        )
+                                    } else if (index >= 42 && index <= 47 && seat.seatName == '7') {
+                                        return (
+                                            <div className="col">{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 42 && index <= 47 && seat.isAvailable == true) {
+                                        return (
+                                            <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 42 && index <= 47 && seat.isAvailable == false) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    }
+                                })
+                            }
+                        </div>
+
+                        <div className="row">
+                            {
+                                aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
+
+                                    if (index >= 48 && index <= 51 && seat.isAvailable == true) {
+                                        return (
+                                            <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 48 && index <= 51 && seat.isAvailable == false) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    }
+                                })
+                            }
                         </div>
                     </div>
 
@@ -257,7 +434,7 @@ const ABus = () => {
                                 }
                             </p>
                         </div>
-                        <div className="ticket_details">
+                        {/* <div className="ticket_details">
                             <p>Price: </p>
                             <p>
                                 {
@@ -268,9 +445,9 @@ const ABus = () => {
                                         "25 BDT"
                                 }
                             </p>
-                        </div>
+                        </div> */}
                         {
-                            <button onClick={handleUpdateTicket} className="_button continue_button">CONTINUE</button>
+                            <button onClick={handleUpdateTicket} className="btn btn-dark">Continue</button>
                         }
 
 

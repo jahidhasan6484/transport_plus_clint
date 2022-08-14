@@ -30,9 +30,8 @@ const AllBus = () => {
     }
 
     return (
-        <div className="section_design allBus">
             <div className="container">
-                <h4 className="section_title">All Bus</h4>
+            <h4 className="section_title">অল <span className="highlight">বাস</span></h4>
 
                 <table class="table">
                     <thead class="thead-light">
@@ -73,17 +72,10 @@ const AllBus = () => {
 
                             </>)
                         }
-
-
-
-
                     </tbody>
                 </table>
-
-
-
             </div>
-        </div>
+    
     );
 };
 

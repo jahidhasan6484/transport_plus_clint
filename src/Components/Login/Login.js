@@ -6,6 +6,7 @@ import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hook
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import login from '../../images/bg/login.gif';
 
 const Login = () => {
 
@@ -41,7 +42,7 @@ const Login = () => {
         if (studentEmailPattern.test(event.target.value)) {
             setUserInfo({ ...userInfo, email: event.target.value });
             setErrors({ ...errors, emailError: "" });
-            localStorage.setItem('userType', "Student");
+            localStorage.setItem('userType', "Faculty");
         }
         else if (facultyEmailPattern.test(event.target.value)) {
             setUserInfo({ ...userInfo, email: event.target.value });
@@ -94,41 +95,50 @@ const Login = () => {
 
 
     return (
-        <div className="section_design login">
+        <div className="section login">
             <div className="container">
-                <h4 className="section_title">Login</h4>
-                <form onSubmit={handleFormSubmit}>
+                <h4 className="section_title">লগ <span className="highlight">ইন</span></h4>
 
-                    <div className="form-floating mb-3">
-                        <input onChange={handleEmailChange} type="email" className="form-control" id="floatingInput" placeholder="name@example.com" required />
-                        <label for="floatingInput">Email address</label>
-                        {errors?.emailError && (
-                            <p className="error_message">
-                                {errors?.emailError}
+                <div className="row form_area">
+                    <div className="col-md-7">
+                        <form onSubmit={handleFormSubmit}>
+                            <div className="mb-3">
+                                <label className="form_label" for="floatingInput">ইমেইল এড্রেস</label>
+                                <input onChange={handleEmailChange} type="email" className="form-control input_box" id="floatingInput" placeholder="name@example.com" required />
+
+                                {errors?.emailError && (
+                                    <p className="error_message">
+                                        {errors?.emailError}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="form_label" for="floatingPassword">পাসওয়ার্ড</label>
+                                <input onChange={handlePasswordChange} type="password" className="form-control input_box" id="floatingPassword" placeholder="Password" required />
+
+                                {errors?.passwordError && (
+                                    <p className="error_message">
+                                        {errors?.passwordError}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div>
+                                <input type="submit" value="লগ ইন" className='btn btn-dark' />
+                            </div>
+
+                            <p className="page_route">
+                                Don't have an account?
+                                <Link to="/register" className="change_page">Register yourself</Link>
                             </p>
-                        )}
+
+                        </form>
                     </div>
-
-                    <div className="form-floating">
-                        <input onChange={handlePasswordChange} type="password" className="form-control" id="floatingPassword" placeholder="Password" required />
-                        <label for="floatingPassword">Password</label>
-                        {errors?.passwordError && (
-                            <p className="error_message">
-                                {errors?.passwordError}
-                            </p>
-                        )}
+                    <div className="col-md-5">
+                        <img src={login}></img>
                     </div>
-
-                    <div>
-                        <input type="submit" value="Login" className='_button2' />
-                    </div>
-
-                    <p className="page_route">
-                        Don't have an account?
-                        <Link to="/register" className="change_page">Register yourself</Link>
-                    </p>
-
-                </form>
+                </div>
             </div>
             <ToastContainer />
         </div>

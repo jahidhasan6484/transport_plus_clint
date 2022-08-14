@@ -11,33 +11,38 @@ const SearchResult = () => {
             .then(data => {
                 const filterResult =
                     data.filter(bus =>
+                        // bus.route === sessionStorage.getItem("route")
+                        // && bus.journeyType === sessionStorage.getItem("journeyType")
+                        // && bus.date === sessionStorage.getItem("date")
+                        // && bus.startTime === sessionStorage.getItem("time")
+                        // && 
+                        bus.userType === localStorage.getItem("userType") &&
+                        bus.journeyType === sessionStorage.getItem("journeyType") &&
+                        bus.date === sessionStorage.getItem("date") && 
+                        bus.startTime === sessionStorage.getItem("time") &&
                         bus.route === sessionStorage.getItem("route")
-                        && bus.journeyType === sessionStorage.getItem("journeyType")
-                        && bus.date === sessionStorage.getItem("date")
-                        && bus.startTime === sessionStorage.getItem("time")
-                        && bus.userType === localStorage.getItem("userType")
                     );
 
-                setBuses(filterResult);
+                 setBuses(data);
             });
     }, []);
 
     return (
-        <div className="section_design search_result">
+        <div className="section">
             <div className="container">
-                <h4 className="section_title">Your search result</h4>
+            <h4 className="section_title">সার্চ <span className="highlight">রেজাল্ট</span></h4>
 
                 {
                     buses.length == 0 ?
-                        <p className='search_message'>There is no bus available from {sessionStorage.getItem('from')} to {sessionStorage.getItem('to')} at {sessionStorage.getItem('time')}</p>
+                        <p className='search_message'>{sessionStorage.getItem('from')} থেকে {sessionStorage.getItem('to')} পর্যন্ত {sessionStorage.getItem('time')} টায় কোনো বাস এভেইলেবল নেই।</p>
                         :
                         <div className='desire_buses'>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Bus Name</th>
-                                        <th scope="col">Available Seats</th>
-                                        <th scope="col">Options</th>
+                                        <th scope="col">বাসের নাম</th>
+                                        <th scope="col">এভেইলেবল সিট</th>
+                                        <th scope="col">অপশন</th>
                                     </tr>
                                 </thead>
                                 <tbody>
