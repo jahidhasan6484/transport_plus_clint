@@ -7,6 +7,8 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import driver from '../../images/bg/driver.png';
+
 
 const ABus = () => {
 
@@ -32,25 +34,26 @@ const ABus = () => {
         date: ""
     })
 
-    console.log("userTicket0000:", userTicket)
-
     const handleTicketSelect = (seatNumber, index, user) => {
         setSeat(seatNumber);
 
         const setSelected = () => {
             let bus = { ...aBus }
-            let userNewTicket = {...userTicket}
+            let userNewTicket = { ...userTicket }
             if (toSelected != null) {
                 console.log("To selected Value :", bus.seats[toSelected])
                 bus.seats[toSelected].isAvailable = true;
             }
             bus.seats[index].isAvailable = false;
             bus.seats[index].owner = `${user.email}`;
+            bus.seats[index].from = `${sessionStorage.getItem("from")}`;
+            bus.seats[index].to = `${sessionStorage.getItem("to")}`;
+
             userNewTicket.user = `${user.email}`;
             userNewTicket.seatName = bus.seats[index].seatName;
             userNewTicket.busName = bus.busName;
             userNewTicket.date = bus.date;
-            
+
             setUserTicket(userNewTicket);
             setToSelected(index);
             return bus;
@@ -75,100 +78,113 @@ const ABus = () => {
                 },
                 body: JSON.stringify(userTicket)
             })
-                // .then(res => res.json())
-                // .then(data => {
-                //     if (data.insertedId) {
-                //         alert("Data added successfully");
-                //     }
-                // })
+            // .then(res => res.json())
+            // .then(data => {
+            //     if (data.insertedId) {
+            //         alert("Data added successfully");
+            //     }
+            // })
 
-                fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(aBus)
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(aBus)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        alert("Seat booked successsfully, please check dashboard for more details");
+                        window.location.reload(true);
+                    }
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.modifiedCount > 0) {
-                            alert("Seat booked successsfully, please check dashboard for more details");
-                            window.location.reload(true);
-                        }
-                    })
         }
     }
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
             {props}
-            
+
         </Tooltip>
     );
 
 
     return (
-        <div className='section_design'>
+        <div className='section'>
             <div className='container'>
-                <h4 className="section_title">{aBus.busName}</h4>
+                <h4 className="section_title"><span className="highlight">{aBus.busName}</span></h4>
+
                 <div className="tab-content" id="nav-tabContent">
                     <div className="row">
                         <div className="col ticket_count">
-                            <p>Total</p>
+                            <p>টোটাল</p>
                             <p>{aBus.totalSeat}</p>
                         </div>
                         <div className="col ticket_count">
-                            <p>Avialable</p>
+                            <p>এভেইলেবল</p>
                             <p>{aBus.available}</p>
                         </div>
                         <div className="col ticket_count">
-                            <p>Unavailable</p>
+                            <p>আনএভেইলেবল</p>
                             <p>{aBus.unavailable}</p>
                         </div>
                     </div>
                 </div>
 
                 <div className="row ticket_ui">
-
-                    <div className="seat_status">
-                        <p className="avialable_seat"> Avialable</p>
-                        <p className="selected_seat"> Selected</p>
-                        <p className="unavialable_seat"> Unavailable</p>
+                    <div className="row">
+                        <div className="col-md-8 seat_status">
+                            <div className="col status_color avialable_seat">এভেইলেবল</div>
+                            <div className="col status_color selected_seat">সিলেক্টেড</div>
+                            <div className="col status_color shyamoli_seat">শ্যামলী</div>
+                            <div className="col status_color kallyanpur_seat">কল্যাণপুর</div>
+                        </div>
                     </div>
 
-
                     <div className="col-md-8 ticket_interface">
+
                         <div className="row">
-                        {
+                            {
                                 aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
 
-                                    if (index >=0 && index <= 5 && seat.seatName == 'S0') {
+                                    if (index >= 0 && index <= 5 && seat.seatName == 'S0') {
                                         return (
                                             <div className="col"></div>
                                         )
-                                    } else if (index >=0 && index <= 5 && seat.seatName == 'Driver') {
+                                    } else if (index >= 0 && index <= 5 && seat.seatName == 'Driver') {
                                         return (
-                                            <div className="col">Driver</div>
+                                            <div className="col ticket_point">ড্রাইভার</div>
                                         )
-                                    } else if (index >=0 && index <= 5 && seat.isAvailable == true) {
+                                    } else if (index >= 0 && index <= 5 && seat.isAvailable == true) {
                                         return (
                                             <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
                                         )
-                                    } else if (index >=0 && index <= 5 && seat.isAvailable == false) {
+                                    } else if (index >= 0 && index <= 5 && seat.isAvailable == false && (seat.from === "Kallyanpur" || seat.to === "Kallyanpur")) {
                                         return (
                                             <OverlayTrigger
                                                 placement="right"
                                                 delay={{ show: 250, hide: 400 }}
                                                 overlay={renderTooltip(seat.owner)}
                                             >
-                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "kallyanpur"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    } else if (index >= 0 && index <= 5 && seat.isAvailable == false && (seat.from === "Shyamoli Square" || seat.to === "Shyamoli Square")) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "shyamoli"}`} seatName>{seat.seatName}</div>
                                             </OverlayTrigger>
                                         )
                                     }
                                 })
                             }
                         </div>
-                       
+
                         <div className="row mt-5">
                             {
                                 aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
@@ -179,20 +195,34 @@ const ABus = () => {
                                         )
                                     } else if (index >= 6 && index <= 11 && seat.seatName == '1') {
                                         return (
-                                            <div className="col">{seat.seatName}</div>
+                                            <div className="col ticket_point">{seat.seatName}</div>
+                                        )
+                                    } else if (index >= 6 && index <= 11 && seat.seatName == 'Entry') {
+                                        return (
+                                            <div className="col ticket_point">গেট</div>
                                         )
                                     } else if (index >= 6 && index <= 11 && seat.isAvailable == true) {
                                         return (
                                             <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
                                         )
-                                    } else if (index >= 6 && index <= 11 && seat.isAvailable == false) {
+                                    } else if (index >= 6 && index <= 11 && seat.isAvailable == false && (seat.from === "Kallyanpur" || seat.to === "Kallyanpur")) {
                                         return (
                                             <OverlayTrigger
                                                 placement="right"
                                                 delay={{ show: 250, hide: 400 }}
                                                 overlay={renderTooltip(seat.owner)}
                                             >
-                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "kallyanpur"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    } else if (index >= 6 && index <= 11 && seat.isAvailable == false && (seat.from === "Shyamoli Square" || seat.to === "Shyamoli Square")) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "shyamoli"}`} seatName>{seat.seatName}</div>
                                             </OverlayTrigger>
                                         )
                                     }
@@ -209,20 +239,30 @@ const ABus = () => {
                                         )
                                     } else if (index >= 12 && index <= 17 && seat.seatName == '2') {
                                         return (
-                                            <div className="col">{seat.seatName}</div>
+                                            <div className="col ticket_point">{seat.seatName}</div>
                                         )
                                     } else if (index >= 12 && index <= 17 && seat.isAvailable == true) {
                                         return (
                                             <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
                                         )
-                                    } else if (index >= 12 && index <= 17 && seat.isAvailable == false) {
+                                    } else if (index >= 12 && index <= 17 && seat.isAvailable == false && (seat.from === "Kallyanpur" || seat.to === "Kallyanpur")) {
                                         return (
                                             <OverlayTrigger
                                                 placement="right"
                                                 delay={{ show: 250, hide: 400 }}
                                                 overlay={renderTooltip(seat.owner)}
                                             >
-                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "kallyanpur"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    } else if (index >= 12 && index <= 17 && seat.isAvailable == false && (seat.from === "Shyamoli Square" || seat.to === "Shyamoli Square")) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "shyamoli"}`} seatName>{seat.seatName}</div>
                                             </OverlayTrigger>
                                         )
                                     }
@@ -239,20 +279,30 @@ const ABus = () => {
                                         )
                                     } else if (index >= 18 && index <= 23 && seat.seatName == '3') {
                                         return (
-                                            <div className="col">{seat.seatName}</div>
+                                            <div className="col ticket_point">{seat.seatName}</div>
                                         )
                                     } else if (index >= 18 && index <= 23 && seat.isAvailable == true) {
                                         return (
                                             <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
                                         )
-                                    } else if (index >= 18 && index <= 23 && seat.isAvailable == false) {
+                                    } else if (index >= 18 && index <= 23 && seat.isAvailable == false && (seat.from === "Kallyanpur" || seat.to === "Kallyanpur")) {
                                         return (
                                             <OverlayTrigger
                                                 placement="right"
                                                 delay={{ show: 250, hide: 400 }}
                                                 overlay={renderTooltip(seat.owner)}
                                             >
-                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "kallyanpur"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    } else if (index >= 18 && index <= 23 && seat.isAvailable == false && (seat.from === "Shyamoli Square" || seat.to === "Shyamoli Square")) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "shyamoli"}`} seatName>{seat.seatName}</div>
                                             </OverlayTrigger>
                                         )
                                     }
@@ -269,20 +319,30 @@ const ABus = () => {
                                         )
                                     } else if (index >= 24 && index <= 29 && seat.seatName == '4') {
                                         return (
-                                            <div className="col">{seat.seatName}</div>
+                                            <div className="col ticket_point">{seat.seatName}</div>
                                         )
                                     } else if (index >= 24 && index <= 29 && seat.isAvailable == true) {
                                         return (
                                             <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
                                         )
-                                    } else if (index >= 24 && index <= 29 && seat.isAvailable == false) {
+                                    } else if (index >= 24 && index <= 29 && seat.isAvailable == false && (seat.from === "Kallyanpur" || seat.to === "Kallyanpur")) {
                                         return (
                                             <OverlayTrigger
                                                 placement="right"
                                                 delay={{ show: 250, hide: 400 }}
                                                 overlay={renderTooltip(seat.owner)}
                                             >
-                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "kallyanpur"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    } else if (index >= 24 && index <= 29 && seat.isAvailable == false && (seat.from === "Shyamoli Square" || seat.to === "Shyamoli Square")) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "shyamoli"}`} seatName>{seat.seatName}</div>
                                             </OverlayTrigger>
                                         )
                                     }
@@ -300,20 +360,30 @@ const ABus = () => {
                                         )
                                     } else if (index >= 30 && index <= 35 && seat.seatName == '5') {
                                         return (
-                                            <div className="col">{seat.seatName}</div>
+                                            <div className="col ticket_point">{seat.seatName}</div>
                                         )
                                     } else if (index >= 30 && index <= 35 && seat.isAvailable == true) {
                                         return (
                                             <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
                                         )
-                                    } else if (index >= 30 && index <= 35 && seat.isAvailable == false) {
+                                    } else if (index >= 30 && index <= 35 && seat.isAvailable == false && (seat.from === "Kallyanpur" || seat.to === "Kallyanpur")) {
                                         return (
                                             <OverlayTrigger
                                                 placement="right"
                                                 delay={{ show: 250, hide: 400 }}
                                                 overlay={renderTooltip(seat.owner)}
                                             >
-                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "kallyanpur"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    } else if (index >= 30 && index <= 35 && seat.isAvailable == false && (seat.from === "Shyamoli Square" || seat.to === "Shyamoli Square")) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "shyamoli"}`} seatName>{seat.seatName}</div>
                                             </OverlayTrigger>
                                         )
                                     }
@@ -330,20 +400,30 @@ const ABus = () => {
                                         )
                                     } else if (index >= 36 && index <= 41 && seat.seatName == '6') {
                                         return (
-                                            <div className="col">{seat.seatName}</div>
+                                            <div className="col ticket_point">{seat.seatName}</div>
                                         )
                                     } else if (index >= 36 && index <= 41 && seat.isAvailable == true) {
                                         return (
                                             <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
                                         )
-                                    } else if (index >= 36 && index <= 41 && seat.isAvailable == false) {
+                                    } else if (index >= 36 && index <= 41 && seat.isAvailable == false && (seat.from === "Kallyanpur" || seat.to === "Kallyanpur")) {
                                         return (
                                             <OverlayTrigger
                                                 placement="right"
                                                 delay={{ show: 250, hide: 400 }}
                                                 overlay={renderTooltip(seat.owner)}
                                             >
-                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "kallyanpur"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    } else if (index >= 36 && index <= 41 && seat.isAvailable == false && (seat.from === "Shyamoli Square" || seat.to === "Shyamoli Square")) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "shyamoli"}`} seatName>{seat.seatName}</div>
                                             </OverlayTrigger>
                                         )
                                     }
@@ -361,20 +441,30 @@ const ABus = () => {
                                         )
                                     } else if (index >= 42 && index <= 47 && seat.seatName == '7') {
                                         return (
-                                            <div className="col">{seat.seatName}</div>
+                                            <div className="col ticket_point">{seat.seatName}</div>
                                         )
                                     } else if (index >= 42 && index <= 47 && seat.isAvailable == true) {
                                         return (
                                             <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
                                         )
-                                    } else if (index >= 42 && index <= 47 && seat.isAvailable == false) {
+                                    } else if (index >= 42 && index <= 47 && seat.isAvailable == false && (seat.from === "Kallyanpur" || seat.to === "Kallyanpur")) {
                                         return (
                                             <OverlayTrigger
                                                 placement="right"
                                                 delay={{ show: 250, hide: 400 }}
                                                 overlay={renderTooltip(seat.owner)}
                                             >
-                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "kallyanpur"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    } else if (index >= 42 && index <= 47 && seat.isAvailable == false && (seat.from === "Shyamoli Square" || seat.to === "Shyamoli Square")) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "shyamoli"}`} seatName>{seat.seatName}</div>
                                             </OverlayTrigger>
                                         )
                                     }
@@ -390,14 +480,24 @@ const ABus = () => {
                                         return (
                                             <div onClick={() => handleTicketSelect(seat.seatName, index, user)} className={`col a_seat ${index === toSelected ? "selected" : "available"}`} seatName>{seat.seatName}</div>
                                         )
-                                    } else if (index >= 48 && index <= 51 && seat.isAvailable == false) {
+                                    } else if (index >= 48 && index <= 51 && seat.isAvailable == false && (seat.from === "Kallyanpur" || seat.to === "Kallyanpur")) {
                                         return (
                                             <OverlayTrigger
                                                 placement="right"
                                                 delay={{ show: 250, hide: 400 }}
                                                 overlay={renderTooltip(seat.owner)}
                                             >
-                                                <div className={`col a_seat ${index === toSelected ? "selected" : "unavailable"}`} seatName>{seat.seatName}</div>
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "kallyanpur"}`} seatName>{seat.seatName}</div>
+                                            </OverlayTrigger>
+                                        )
+                                    } else if (index >= 48 && index <= 51 && seat.isAvailable == false && (seat.from === "Shyamoli Square" || seat.to === "Shyamoli Square")) {
+                                        return (
+                                            <OverlayTrigger
+                                                placement="right"
+                                                delay={{ show: 250, hide: 400 }}
+                                                overlay={renderTooltip(seat.owner)}
+                                            >
+                                                <div className={`col a_seat ${index === toSelected ? "selected" : "shyamoli"}`} seatName>{seat.seatName}</div>
                                             </OverlayTrigger>
                                         )
                                     }
@@ -408,23 +508,23 @@ const ABus = () => {
 
                     <div className="col-md-4 pt-5">
                         <div className="ticket_details">
-                            <p>Bus Name: </p>
+                            <p>বাসের নাম: </p>
                             <p>{aBus.busName}</p>
                         </div>
                         <div className="ticket_details">
-                            <p>User Type: </p>
+                            <p>ইউজার টাইপ: </p>
                             <p>{aBus.userType}</p>
                         </div>
                         <div className="ticket_details">
-                            <p>Departure Time: </p>
+                            <p>ডিপার্চার টাইম: </p>
                             <p>{aBus.startTime}</p>
                         </div>
                         <div className="ticket_details">
-                            <p>Departure Place: </p>
+                            <p>ডিপার্চার প্লেস: </p>
                             <p>{aBus.route}</p>
                         </div>
                         <div className="ticket_details">
-                            <p>Your Seat: </p>
+                            <p>আপনার সিট: </p>
                             <p>
                                 {
                                     seat ?
@@ -438,7 +538,7 @@ const ABus = () => {
                             <p>Price: </p>
                             <p>
                                 {
-                                    sessionStorage.getItem("userType") === "Faculty"
+                                    sessionStorage.getItem("userType") ==== "Faculty"
                                         ?
                                         "40 BDT"
                                         :

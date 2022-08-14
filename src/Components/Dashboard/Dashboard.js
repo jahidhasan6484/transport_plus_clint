@@ -28,7 +28,7 @@ const Dashboard = () => {
 
                 <div className="row">
                     <div className="col-md-2 sidebar">
-                        <Link class="" to="/dashboard/profile" onClick={()=> setProfileShow(false)}>প্রোফাইল</Link>
+                        <Link class="" to="/dashboard/profile" onClick={()=> setProfileShow(true)}>প্রোফাইল</Link>
                         {
                             admins.map(admin => <>
 

@@ -2,12 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import SearchResult from './Components/SearchResult/SearchResult';
-import Payment from './Components/Payment/Payment';
-import Sponsors from './Components/Sponsors/Sponsors';
-import Facilities from './Components/Facilities/Facilities';
 import Navbar from './Components/Navbar/Navbar';
 import Dashboard from './Components/Dashboard/Dashboard';
-import VideoBackground from './Components/VideoBackground/VideoBackground';
 import Register from './Components/Register/Register';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
 import Login from './Components/Login/Login';
@@ -44,7 +40,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/verified" element={<Verified />} />
         <Route path="/bookTicket" element={<SearchTicket />} />
-        {/* <Route path="/facilities" element={<Facilities />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/addBus/update/:id" element={<Update />} />
@@ -62,13 +57,6 @@ function App() {
           </RequireAuth>
         }>
         </Route>
-
-        {/* <Route path="/payment" element={
-          <RequireAuth>
-            <Payment />
-          </RequireAuth>
-        }>
-        </Route> */}
 
         <Route path="/dashboard" element={
           <RequireAuth>

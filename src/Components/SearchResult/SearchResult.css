@@ -55,27 +55,6 @@
 } */
 
 
-.avialable_seat::before {
-    content: ".......";
-    color: green;
-    background: green;
-    border-radius: 4px;
-}
-
-.selected_seat::before {
-    content: ".......";
-    color: #000;
-    background: #000;
-    border-radius: 4px;
-}
-
-.unavialable_seat::before {
-    content: ".......";
-    color: red;
-    background: red;
-    border-radius: 4px;
-}
-
 
 .ticket_count {
     text-align: center;

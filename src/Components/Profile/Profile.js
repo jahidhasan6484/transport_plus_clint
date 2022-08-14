@@ -21,11 +21,9 @@ const Profile = () => {
             });
     }, []);
 
-    // console.log("buses", buses);
-
-
     return (
-        <div className="container">
+        <div className="section">
+            <div className="container" id="profile">
             <h4 className="section_title">আপনার <span className="highlight">প্রোফাইল</span></h4>
 
             <div className="row">
@@ -60,6 +58,7 @@ const Profile = () => {
 
                 </div>
             </div>
+        </div>
         </div>
 
     )

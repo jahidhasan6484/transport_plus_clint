@@ -19,7 +19,7 @@ const AddBus = () => {
         const startTime = startTimeRef.current.value;
 
         const totalSeat = 33;
-        const available = 28;
+        const available = 33;
         const unavailable = 0;
 
 
@@ -190,16 +190,21 @@ const AddBus = () => {
             {
                 seatName: 'F1',
                 isAvailable: true,
-                owner: ""
-            },
-            {
-                seatName: 'S0',
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'F2',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
+            {
+                seatName: 'S0',
+            },
+            
             {
                 seatName: 'S0',
             },
@@ -209,36 +214,46 @@ const AddBus = () => {
             {
                 seatName: 'Driver',
             },
+
+
             {
-                seatName: 'A1',
-                isAvailable: false,
-                owner: "narayan@daffodilvarsity.edu.bd"
+                seatName: 'Entry',
             },
             {
                 seatName: 'S1'
             },
             {
                 seatName: 'B1',
-                isAvailable: false,
-                owner: "jahid15-12482@diu.edu.bd"
+                isAvailable: true,
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: '1',
             },
             {
                 seatName: 'C1',
-                isAvailable: false,
-                owner: "tanvir.cse@diu.edu.bd"
+                isAvailable: true,
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'D1',
-                isAvailable: false,
-                owner: "tazib.cse@diu.edu.bd"
+                isAvailable: true,
+                owner: "",
+                from: "",
+                to: ""
             },
+
+
             {
-                seatName: 'A2',
-                isAvailable: false,
-                owner: "polin.cse0317.c@diu.edu.bd"
+                seatName: 'A1',
+                isAvailable: true,
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'S2'
@@ -246,7 +261,9 @@ const AddBus = () => {
             {
                 seatName: 'B2',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: '2',
@@ -254,17 +271,26 @@ const AddBus = () => {
             {
                 seatName: 'C2',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'D2',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
+
+
+
             {
-                seatName: 'A3',
+                seatName: 'A2',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'S3'
@@ -272,7 +298,9 @@ const AddBus = () => {
             {
                 seatName: 'B3',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: '3',
@@ -280,17 +308,25 @@ const AddBus = () => {
             {
                 seatName: 'C3',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'D3',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
+
+
             {
-                seatName: 'A4',
+                seatName: 'A3',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'S4'
@@ -298,7 +334,9 @@ const AddBus = () => {
             {
                 seatName: 'B4',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: '4',
@@ -306,17 +344,25 @@ const AddBus = () => {
             {
                 seatName: 'C4',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'D4',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
+
+
             {
-                seatName: 'A5',
+                seatName: 'A4',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'S5'
@@ -324,7 +370,9 @@ const AddBus = () => {
             {
                 seatName: 'B5',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: '5',
@@ -332,17 +380,25 @@ const AddBus = () => {
             {
                 seatName: 'C5',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'D5',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
+
+
             {
-                seatName: 'A6',
+                seatName: 'A5',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'S6'
@@ -350,7 +406,9 @@ const AddBus = () => {
             {
                 seatName: 'B6',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: '6',
@@ -358,15 +416,26 @@ const AddBus = () => {
             {
                 seatName: 'C6',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'D6',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
+
+
+
             {
-                seatName: 'S7'
+                seatName: 'A6',
+                isAvailable: true,
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'S7'
@@ -374,7 +443,9 @@ const AddBus = () => {
             {
                 seatName: 'B7',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: '7',
@@ -382,32 +453,46 @@ const AddBus = () => {
             {
                 seatName: 'C7',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'D7',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
+
+            
             {
                 seatName: 'E1',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'E2',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'E3',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             },
             {
                 seatName: 'E4',
                 isAvailable: true,
-                owner: ""
+                owner: "",
+                from: "",
+                to: ""
             }
         ]
         let dateFormate = '';
@@ -443,7 +528,8 @@ const AddBus = () => {
         e.preventDefault();
     }
     return (
-        <div className="container">
+        <div className='section'>
+            <div className="container" id='addBus'>
             <h4 className="section_title">এড <span className="highlight">বাস</span></h4>
             <form onSubmit={handleAddData}>
 
@@ -533,6 +619,7 @@ const AddBus = () => {
             </form>
         </div>
 
+        </div>
     );
 };
 

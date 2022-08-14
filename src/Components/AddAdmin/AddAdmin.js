@@ -56,7 +56,8 @@ const AddAdmin = () => {
     }
 
     return (
-            <div className="container">
+            <div className='section'>
+                <div className="container" id='addAdmin'>
             <h4 className="section_title">এড <span className="highlight">এডমিন</span></h4>
 
                 <form onSubmit={handleAddAdmin}>
@@ -71,6 +72,7 @@ const AddAdmin = () => {
                         <input type="submit" className='btn btn-dark'></input>
                     </div>
                 </form>
+            </div>
             </div>
     );
 };

@@ -30,8 +30,9 @@ const AllBus = () => {
     }
 
     return (
-            <div className="container">
-            <h4 className="section_title">অল <span className="highlight">বাস</span></h4>
+        <div className="section" id="allBus">
+            <div className="container" >
+                <h4 className="section_title">অল <span className="highlight">বাস</span></h4>
 
                 <table class="table">
                     <thead class="thead-light">
@@ -75,7 +76,8 @@ const AllBus = () => {
                     </tbody>
                 </table>
             </div>
-    
+        </div>
+
     );
 };
 

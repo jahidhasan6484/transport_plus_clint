@@ -47,7 +47,7 @@ const SearchTicket = () => {
         const time = timeRef.current.value;
 
 
-        const dhanmondi = ["Dhanmondi", "Sobhanbag", "Shyamoli Square", "Technical Mor", "Majar Road Gabtoli", "Konabari Bus Stop", "Eastern Housing Rup Nogor", "Birulia Bus Stand", "Daffodil Smart City"];
+        const dhanmondi = ["Dhanmondi", "Sobhanbag", "Shyamoli Square", "Kallyanpur", "Technical Mor", "Majar Road Gabtoli", "Konabari Bus Stop", "Eastern Housing Rup Nogor", "Birulia Bus Stand", "Daffodil Smart City"];
         const uttara = ["Uttara - Rajlokkhi", "House building", "Grand Zomzom Tower", "Diyabari Bridge", "Beribadh", "Birulia", "Khagan", "Daffodil Smart City"];
         const tongiCollegeGate = ["Tongi College Gate Bus Stand", "Kamar Para", "Dhour", "Daffodil Smart City"];
 

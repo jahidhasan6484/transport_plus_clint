@@ -3,11 +3,12 @@ import './LoadingPage.css';
 
 const LoadingPage = () => {
     return (
-        <div className='section_design'>
-            <div className='container loading'>
-                <p className='loading_text'>loading...</p>
+        <div className='section'>
+            <div class="spinner">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
-
         </div>
     );
 };

@@ -7,6 +7,7 @@ const Options = () => {
             {/* <option>Dhanmondi</option>
             <option>Sobhanbag</option> */}
             <option>Shyamoli Square</option>
+            <option>Kallyanpur</option>
             {/* <option>Technical Mor</option>
             <option>Majar Road Gabtoli</option>
             <option>Konabari Bus Stop</option>
