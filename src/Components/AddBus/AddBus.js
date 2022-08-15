@@ -593,7 +593,7 @@ const AddBus = () => {
                             <option selected="" disabled="" value="">Select...</option>
 
                             <option>07:00 AM</option>
-                            <option>40:20 PM</option>
+                            <option>04:20 PM</option>
 
                             {/* <option>08:30 AM</option>
                                 <option>09:00 AM</option>

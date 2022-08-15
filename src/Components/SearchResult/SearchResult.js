@@ -23,7 +23,7 @@ const SearchResult = () => {
                         bus.route === sessionStorage.getItem("route")
                     );
 
-                 setBuses(data);
+                 setBuses(filterResult);
             });
     }, []);
 

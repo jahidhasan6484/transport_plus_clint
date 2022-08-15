@@ -72,3 +72,8 @@
 .seat_status {
     margin-bottom: 2rem;
 }
+
+.wheel {
+   color: #fff;
+   font-size: 1.5rem;
+}

@@ -54,7 +54,7 @@ const SearchTicket = () => {
         let route = "";
 
         if (dhanmondi.includes(from) && dhanmondi.includes(to)) {
-            route = "Dhanmondi";
+            route = "Shyamoli Square";
         }
         else if (uttara.includes(from) && uttara.includes(to)) {
             route = "Uttara";

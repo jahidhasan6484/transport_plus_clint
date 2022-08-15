@@ -6,15 +6,15 @@ import Tooltip from 'react-bootstrap/Tooltip';
 
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { GiSteeringWheel } from 'react-icons/gi';
+import { faSlash } from "@fortawesome/free-solid-svg-icons";
 
-import driver from '../../images/bg/driver.png';
 
 
 const ABus = () => {
 
     const [user] = useAuthState(auth);
 
-    console.log(user.email, "USER HERE");
     const { id } = useParams();
     const [aBus, setABus] = useState([]);
     const [seat, setSeat] = useState(null);
@@ -31,8 +31,14 @@ const ABus = () => {
         user: "",
         seatName: "",
         busName: "",
-        date: ""
+        date: "",
+        journeyType: ""
     })
+
+
+
+
+
 
     const handleTicketSelect = (seatNumber, index, user) => {
         setSeat(seatNumber);
@@ -53,6 +59,7 @@ const ABus = () => {
             userNewTicket.seatName = bus.seats[index].seatName;
             userNewTicket.busName = bus.busName;
             userNewTicket.date = bus.date;
+            userNewTicket.journeyType = `${sessionStorage.getItem("journeyType")}`;
 
             setUserTicket(userNewTicket);
             setToSelected(index);
@@ -61,13 +68,33 @@ const ABus = () => {
         setABus(setSelected());
     }
 
+        //From Database
+        const [canBookTicket, setCanBookTicket] = useState(true);
+
+        useEffect(() => {
+            fetch('http://localhost:5000/updateUserTicketCollection')
+                .then(res => res.json())
+                .then(data => {
+                    const filterResult =
+                        data.filter(ticket =>
+                            ticket.user === `${user.email}` && 
+                            ticket.date == sessionStorage.getItem("date") &&
+                            ticket.journeyType == sessionStorage.getItem("journeyType")
+                        );
+                        setCanBookTicket(filterResult);
+                });
+        }, []);
+    
+     console.log("canBookTicket:", canBookTicket.length)
+
 
     const handleUpdateTicket = () => {
 
         if (seat === null) {
             alert("Please select an available ticket");
-        }
-        else {
+        } else if (canBookTicket.length >= 1) {
+            alert("You can not buy more than one ticket of a journey type!");
+        } else {
             const url = `http://localhost:5000/updateTicket/${id}`;
             const url2 = "http://localhost:5000/updateUserTicketCollection";
 
@@ -154,7 +181,9 @@ const ABus = () => {
                                         )
                                     } else if (index >= 0 && index <= 5 && seat.seatName == 'Driver') {
                                         return (
-                                            <div className="col ticket_point">ড্রাইভার</div>
+                                            <div className="col">
+                                                <GiSteeringWheel className="wheel" />
+                                            </div>
                                         )
                                     } else if (index >= 0 && index <= 5 && seat.isAvailable == true) {
                                         return (
