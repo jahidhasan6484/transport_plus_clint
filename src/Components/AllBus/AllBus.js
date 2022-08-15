@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import './AllBus.css';
 
 const AllBus = () => {
     const [buses, setBuses] = useState([]);
@@ -34,47 +35,26 @@ const AllBus = () => {
             <div className="container" >
                 <h4 className="section_title">অল <span className="highlight">বাস</span></h4>
 
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Bus Name</th>
-                            <th scope="col">Journey Type</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Start Time</th>
-                            <th scope="col">User Type</th>
-                            <th scope="col">Action</th>
-                            <th scope="col">Update</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div className="row">
+                    {
+                        buses.map(bus => <>
+                            <div className="col-md-12 all_bus_info">
+                                <p>{bus.busName}</p>
+                                <p>{bus.journeyType}</p>
+                                <p>{bus.date}</p>
+                                <p>{bus.startTime}</p>
+                                <p>{bus.userType}</p>
+                                <p onClick={() => handleDeleteData(bus._id)} className="delete btn btn-danger">ডিলিট</p>
 
-                        {
-                            buses.map(bus => <>
-                                <tr>
-                                    <td>{bus.busName}</td>
-                                    <td>{bus.journeyType}</td>
-                                    <td>{bus.date}</td>
-                                    <td>{bus.startTime}</td>
-                                    <td>{bus.userType}</td>
-                                    <td onClick={() => handleDeleteData(bus._id)} className="delete">Delete</td>
-
-                                    <td>
-                                        <Link to={`/addBus/update/${bus._id}`}>
-                                            Edit
-                                        </Link>
-                                    </td>
-
-                                </tr>
-                                {/* <p>Name: {bus.route} Start Time: {bus.startTime} <button onClick={() => handleDeleteData(bus._id)}>X</button>
-                                        <Link to={`/addBus/update/${bus._id}`}>
-                                            <button>Update</button>
-                                        </Link>
-                                    </p> */}
-
-                            </>)
-                        }
-                    </tbody>
-                </table>
+                                <p>
+                                    <Link to={`/addBus/update/${bus._id}`} className="btn btn-warning">
+                                        ইডিট
+                                    </Link>
+                                </p>
+                            </div>
+                        </>)
+                    }
+                </div>
             </div>
         </div>
 

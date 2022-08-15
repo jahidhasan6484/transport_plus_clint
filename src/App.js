@@ -34,7 +34,6 @@ function App() {
 
   return (
     <>
-
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -60,36 +59,26 @@ function App() {
 
         <Route path="/dashboard" element={
           <RequireAuth>
-            <Dashboard >
-            </Dashboard>
-
-
-
+            <Dashboard />
           </RequireAuth>
-
-
         }>
           <Route path="profile" element={<Profile />}>
           </Route>
-          <Route path="addBus" element={
-
+          {/* <Route path="addBus" element={
             <AddBus />
-
           }>
           </Route>
           <Route path="allbus" element={<AllBus />}>
           </Route>
           <Route path="addAdmin" element={<AddAdmin />}>
-          </Route>
+          </Route> */}
           {
             admins.map(admin => <>
               {
                 admin?.adminEmail === user?.email
                 && <>
                   <Route path="addBus" element={
-
                     <AddBus />
-
                   }>
                   </Route>
                   <Route path="allbus" element={<AllBus />}>
@@ -102,43 +91,7 @@ function App() {
           }
 
         </Route>
-
-        {/* {
-          admins.map(admin => <>
-
-            {
-              admin?.adminEmail === user?.email
-              &&
-              <>
-                <Route path="/addBus" element={
-                  <RequireAuth>
-                    <AddBus />
-                  </RequireAuth>
-                }>
-                </Route>
-
-                <Route path="/allbus" element={
-                  <RequireAuth>
-                    <AllBus />
-                  </RequireAuth>
-                }>
-                </Route>
-
-                <Route path="/addAdmin" element={
-                  <RequireAuth>
-                    <AddAdmin />
-                  </RequireAuth>
-                }>
-                </Route>
-              </>
-            }
-
-          </>)
-        } */}
-
       </Routes>
-
-
     </>
 
   );

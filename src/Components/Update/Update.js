@@ -52,21 +52,21 @@ const Update = () => {
     }
 
     return (
-        <div className="section_design">
+        <div className="section">
             <div className="container">
-                <h4 className="section_title">Update</h4>
+            <h4 className="section_title"><span className="highlight">আপডেট </span>বাস</h4>
 
                 <form onSubmit={handleUpdateBus}>
                     <div>
-                        <label className="form-label">BUS NAME</label>
+                        <label className="form-label">বাসের নাম</label>
                         <input className="form-control" type="text" onChange={handleBusNameChange} value={bus.busName || ""}></input>
                     </div>
                     <div>
-                        <label className="form-label">JOURNEY TYPE</label>
+                        <label className="form-label">জার্নি টাইপ</label>
                         <input className="form-control" type="text" onChange={handleJourneyTypeChange} value={bus.journeyType || ""}></input>
                     </div>
                     <div>
-                        <input type="submit" value="Save Changes" className='search_button' />
+                        <input type="submit" value="সেভ চেঞ্জেস" className='btn btn-dark' />
                     </div>
                 </form>
 

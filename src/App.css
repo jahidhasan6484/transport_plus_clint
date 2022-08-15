@@ -157,3 +157,7 @@ table {
     color: #fff;
     letter-spacing: 5px;
 }
+
+label {
+    letter-spacing: 3px;
+}

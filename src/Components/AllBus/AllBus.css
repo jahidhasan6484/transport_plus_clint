@@ -1,0 +1,11 @@
+.all_bus_info{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    align-items: center;
+}
+
+.all_bus_info p{
+    text-align: center;
+    letter-spacing: 3px;
+}

@@ -7,12 +7,9 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { GiSteeringWheel } from 'react-icons/gi';
-import { faSlash } from "@fortawesome/free-solid-svg-icons";
-
 
 
 const ABus = () => {
-
     const [user] = useAuthState(auth);
 
     const { id } = useParams();
@@ -34,11 +31,6 @@ const ABus = () => {
         date: "",
         journeyType: ""
     })
-
-
-
-
-
 
     const handleTicketSelect = (seatNumber, index, user) => {
         setSeat(seatNumber);
@@ -68,33 +60,31 @@ const ABus = () => {
         setABus(setSelected());
     }
 
-        //From Database
-        const [canBookTicket, setCanBookTicket] = useState(true);
+    //From Database
+    const [canBookTicket, setCanBookTicket] = useState(true);
 
-        useEffect(() => {
-            fetch('http://localhost:5000/updateUserTicketCollection')
-                .then(res => res.json())
-                .then(data => {
-                    const filterResult =
-                        data.filter(ticket =>
-                            ticket.user === `${user.email}` && 
-                            ticket.date == sessionStorage.getItem("date") &&
-                            ticket.journeyType == sessionStorage.getItem("journeyType")
-                        );
-                        setCanBookTicket(filterResult);
-                });
-        }, []);
-    
-     console.log("canBookTicket:", canBookTicket.length)
+    useEffect(() => {
+        fetch('http://localhost:5000/updateUserTicketCollection')
+            .then(res => res.json())
+            .then(data => {
+                const filterResult =
+                    data.filter(ticket =>
+                        ticket.user === `${user.email}` &&
+                        ticket.date == sessionStorage.getItem("date") &&
+                        ticket.journeyType == sessionStorage.getItem("journeyType")
+                    );
+                setCanBookTicket(filterResult);
+            });
+    }, []);
+
+    console.log("canBookTicket:", canBookTicket.length)
 
 
     const handleUpdateTicket = () => {
 
         if (seat === null) {
             alert("Please select an available ticket");
-        } else if (canBookTicket.length >= 1) {
-            alert("You can not buy more than one ticket of a journey type!");
-        } else {
+        } else if (canBookTicket.length < 1) {
             const url = `http://localhost:5000/updateTicket/${id}`;
             const url2 = "http://localhost:5000/updateUserTicketCollection";
 
@@ -105,12 +95,6 @@ const ABus = () => {
                 },
                 body: JSON.stringify(userTicket)
             })
-            // .then(res => res.json())
-            // .then(data => {
-            //     if (data.insertedId) {
-            //         alert("Data added successfully");
-            //     }
-            // })
 
             fetch(url, {
                 method: 'PUT',
@@ -126,16 +110,16 @@ const ABus = () => {
                         window.location.reload(true);
                     }
                 })
+        } else {
+            alert("You can not buy more than one ticket for a journey!");
         }
     }
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
             {props}
-
         </Tooltip>
     );
-
 
     return (
         <div className='section'>
@@ -378,7 +362,6 @@ const ABus = () => {
                                 })
                             }
                         </div>
-
                         <div className="row">
                             {
                                 aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
@@ -459,7 +442,6 @@ const ABus = () => {
                                 })
                             }
                         </div>
-
                         <div className="row">
                             {
                                 aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
@@ -500,7 +482,6 @@ const ABus = () => {
                                 })
                             }
                         </div>
-
                         <div className="row">
                             {
                                 aBus && Array.isArray(aBus.seats) && aBus.seats.map((seat, index) => {
@@ -578,8 +559,6 @@ const ABus = () => {
                         {
                             <button onClick={handleUpdateTicket} className="btn btn-dark">Continue</button>
                         }
-
-
                     </div>
                 </div>
             </div>

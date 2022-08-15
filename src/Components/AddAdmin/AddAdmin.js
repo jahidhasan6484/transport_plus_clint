@@ -48,32 +48,31 @@ const AddAdmin = () => {
                         e.target.reset();
                     }
                 })
-        }
-        else {
+        } else {
             alert("Please add an authentic email");
         }
         e.preventDefault();
     }
 
     return (
-            <div className='section'>
-                <div className="container" id='addAdmin'>
-            <h4 className="section_title">এড <span className="highlight">এডমিন</span></h4>
+        <div className='section'>
+            <div className="container" id='addAdmin'>
+                <h4 className="section_title">এড <span className="highlight">এডমিন</span></h4>
 
                 <form onSubmit={handleAddAdmin}>
                     <div>
-                        <label>Add new admin email</label>
+                        <label>নতুন এডমিন এর ইমেইল দিন</label>
                         <input ref={adminEmailRef} type="email" className='form-control input_box'></input>
                     </div>
 
-                    <p className="text-warning">an admin can access all of the function!</p>
+                    <p className="text-warning">এডমিন সকল ধরনের ফাংশন একসেস করতে পারবে!</p>
 
                     <div>
-                        <input type="submit" className='btn btn-dark'></input>
+                        <input type="submit" value="সাবমিট" className='btn btn-dark'></input>
                     </div>
                 </form>
             </div>
-            </div>
+        </div>
     );
 };
 
