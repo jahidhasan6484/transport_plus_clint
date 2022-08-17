@@ -26,9 +26,10 @@ const ForgetPassword = () => {
     return (
         <div className="section">
             <div className="container">
-                <h4 className="section_title">Forget <span className="highlight">Password</span></h4>
+                <h4 className="section_title">রিসেট <span className="highlight">পাসওয়ার্ড</span></h4>
                 <div className="row">
                     <div className="col-md-8">
+                        <label className="mb-3">আপনার ইমেইল দিন</label>
                         <input className="form-control input_box"
                             type="email"
                             value={email}
@@ -37,10 +38,10 @@ const ForgetPassword = () => {
                         <button className="btn btn-dark mt-3"
                             onClick={async () => {
                                 await sendPasswordResetEmail(email);
-                                alert('A password reset email has been sent to your email address');
+                                alert('পাসওয়ার্ড রিসেট লিংক আপনার ইমেইল পাঠানো হয়েছে।');
                             }}
                         >
-                            Reset password
+                            রিসেট পাসওয়ার্ড
                         </button>
                     </div>
 

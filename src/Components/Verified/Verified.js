@@ -2,7 +2,6 @@ import React from "react";
 import { useAuthState, useSendEmailVerification } from "react-firebase-hooks/auth";
 import { Navigate, useLocation } from "react-router-dom";
 import auth from "../../firebase.init";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingPage from "../LoadingPage/LoadingPage";
 
@@ -34,14 +33,12 @@ const Verified = () => {
               className="btn btn-dark mt-5"
               onClick={async () => {
                 await sendEmailVerification();
-                toast("Send Email", { id: "verification-email" });
+                alert("আপনার ইমেইলে একটি নতুন ভেরিফিকেশন লিংক পাঠানো হয়েছে।")
               }}
             >
               আবার ভেরিফিকেশন লিংক পাঠান
             </button>
           </div>
-
-          <ToastContainer></ToastContainer>
         </div>
       </div>
     </div>

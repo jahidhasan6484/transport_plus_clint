@@ -30,32 +30,6 @@
     padding-bottom: 1rem;
 }
 
-
-/* .available {
-    color: #fff;
-    border-radius: 7px;
-    border: 2px solid green;
-    background: green;
-    cursor: pointer;
-}
-
-.selected {
-    color: #fff;
-    border-radius: 7px;
-    border: 2px solid #000 !important;
-    background: #000;
-    cursor: pointer;
-}
-
-.unavailable {
-    color: fff;
-    border-radius: 7px;
-    border: 2px solid red;
-    background: red;
-} */
-
-
-
 .ticket_count {
     text-align: center;
     font-size: 0.9rem;
@@ -72,6 +46,16 @@
 }
 
 tr {
+    color: #fff;
+    letter-spacing: 3px;
+}
+
+.search_bus_content {
+    display: flex;
+    align-items: center;
+}
+
+.search_bus_info {
     color: #fff;
     letter-spacing: 3px;
 }

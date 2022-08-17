@@ -3,7 +3,7 @@ import React from 'react';
 const Options = () => {
     return (
         <>
-            <option selected="" disabled="" value="">Select...</option>
+            <option selected="" disabled="" value="">সিলেক্ট...</option>
             {/* <option>Dhanmondi</option>
             <option>Sobhanbag</option> */}
             <option>Shyamoli Square</option>

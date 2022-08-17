@@ -63,8 +63,6 @@ function App() {
             <Dashboard />
           </RequireAuth>
         }>
-          {/* <Route path="/profile" element={<Profile />}>
-          </Route> */}
           {
             admins.map(admin => <>
               {

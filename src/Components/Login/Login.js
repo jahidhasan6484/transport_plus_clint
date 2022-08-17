@@ -58,7 +58,7 @@ const Login = () => {
             localStorage.setItem('userType', "Faculty");
         }
         else {
-            setErrors({ ...errors, emailError: "Please enter DIU email address" });
+            setErrors({ ...errors, emailError: "ড্যাফোডিল ইন্টারন্যাশনাল ইউনিভার্সিটি থেকে প্রাপ্ত ইমেইল দিন।" });
             setUserInfo({ ...userInfo, email: "" });
         }
     };
@@ -70,7 +70,7 @@ const Login = () => {
         } else {
             setErrors({
                 ...errors,
-                passwordError: "Password must be at least 6 characters",
+                passwordError: "পাসওয়ার্ড সর্বনিম্ন ৬ অক্ষর যুক্ত হতে হবে।",
             });
             setUserInfo({ ...userInfo, password: "" });
         }
@@ -135,7 +135,7 @@ const Login = () => {
                             </div>
 
                             <div className="mb-3">
-                                <Link to="/forgetPassword" className="text-warning">Forget password?</Link>
+                                <Link to="/forgetPassword" className="text-warning">পাসওয়ার্ড ভুলে গেছেন?</Link>
                             </div>
 
                             <div>
@@ -143,8 +143,8 @@ const Login = () => {
                             </div>
 
                             <p className="page_route">
-                                Don't have an account?
-                                <Link to="/register" className="change_page">Register yourself</Link>
+                            আপনার একাউন্ট নেই?
+                                <Link to="/register" className="change_page">রেজিষ্টার করুন</Link>
                             </p>
 
                         </form>

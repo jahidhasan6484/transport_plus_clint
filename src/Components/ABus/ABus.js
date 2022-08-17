@@ -77,13 +77,11 @@ const ABus = () => {
             });
     }, []);
 
-    console.log("canBookTicket:", canBookTicket.length)
-
 
     const handleUpdateTicket = () => {
 
         if (seat === null) {
-            alert("Please select an available ticket");
+            alert("দয়া করে এভেইলেবল সিট থেকে সিলেক্ট করুন।");
         } else if (canBookTicket.length < 1) {
             const url = `http://localhost:5000/updateTicket/${id}`;
             const url2 = "http://localhost:5000/updateUserTicketCollection";
@@ -106,12 +104,12 @@ const ABus = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.modifiedCount > 0) {
-                        alert("Seat booked successsfully, please check dashboard for more details");
+                        alert("সিট বুকিং সাকসেসফুল। ডিটেইল জানতে ড্যাশবোর্ড চেক করুন।");
                         window.location.reload(true);
                     }
                 })
         } else {
-            alert("You can not buy more than one ticket for a journey!");
+            alert("দুঃখিত, আপনি এক জার্নিতে একাধিক সিট বুক করতে পারবেন না।");
         }
     }
 
@@ -545,7 +543,7 @@ const ABus = () => {
                             </p>
                         </div>
                         {
-                            <button onClick={handleUpdateTicket} className="btn btn-dark">Continue</button>
+                            <button onClick={handleUpdateTicket} className="btn btn-dark">বুক টিকিট</button>
                         }
                     </div>
                 </div>

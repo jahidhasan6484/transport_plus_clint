@@ -48,20 +48,20 @@ const SearchTicket = () => {
 
 
         const dhanmondi = ["Dhanmondi", "Sobhanbag", "Shyamoli Square", "Kallyanpur", "Technical Mor", "Majar Road Gabtoli", "Konabari Bus Stop", "Eastern Housing Rup Nogor", "Birulia Bus Stand", "Daffodil Smart City"];
-        const uttara = ["Uttara - Rajlokkhi", "House building", "Grand Zomzom Tower", "Diyabari Bridge", "Beribadh", "Birulia", "Khagan", "Daffodil Smart City"];
-        const tongiCollegeGate = ["Tongi College Gate Bus Stand", "Kamar Para", "Dhour", "Daffodil Smart City"];
+        // const uttara = ["Uttara - Rajlokkhi", "House building", "Grand Zomzom Tower", "Diyabari Bridge", "Beribadh", "Birulia", "Khagan", "Daffodil Smart City"];
+        // const tongiCollegeGate = ["Tongi College Gate Bus Stand", "Kamar Para", "Dhour", "Daffodil Smart City"];
 
         let route = "";
 
         if (dhanmondi.includes(from) && dhanmondi.includes(to)) {
             route = "Shyamoli Square";
         }
-        else if (uttara.includes(from) && uttara.includes(to)) {
-            route = "Uttara";
-        }
-        else if (tongiCollegeGate.includes(from) && tongiCollegeGate.includes(to)) {
-            route = "Tongi College Gate";
-        }
+        // else if (uttara.includes(from) && uttara.includes(to)) {
+        //     route = "Uttara";
+        // }
+        // else if (tongiCollegeGate.includes(from) && tongiCollegeGate.includes(to)) {
+        //     route = "Tongi College Gate";
+        // }
 
         let dateFormate = '';
 
@@ -89,13 +89,13 @@ const SearchTicket = () => {
                 <div>
                     <nav className="nav">
                         <div className="search__type">
-                            <label>Departure</label>
+                            <label>ডিপার্চার</label>
                             <input type="radio" name="search_type" value="Departure" onChange={handleChange} onClick={() => setSelectType(true)} />
                         </div>
 
                         <div className="search__type">
                             <input type="radio" name="search_type" value="Return" onChange={handleChange} onClick={() => setSelectType(true)} />
-                            <label>Return</label>
+                            <label>রিটার্ন</label>
                         </div>
 
                     </nav>
@@ -110,7 +110,7 @@ const SearchTicket = () => {
                         <form onSubmit={handleSearchData}>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <label className="form-label">FROM</label>
+                                    <label className="form-label">ফ্রম</label>
                                     {
                                         returnType ?
                                             <select ref={fromRef} className="form-select" required>
@@ -125,7 +125,7 @@ const SearchTicket = () => {
 
 
                                 <div className="col-md-6">
-                                    <label className="form-label">TO</label>
+                                    <label className="form-label">টু</label>
                                     {
                                         departureType ?
                                             <select ref={toRef} className="form-select" required>
@@ -139,7 +139,7 @@ const SearchTicket = () => {
                                 </div>
 
                                 <div className="col-md-6">
-                                    <label className="form-label">DATE</label>
+                                    <label className="form-label">ডেট</label>
 
                                     <DatePicker className="form-select"
                                         selected={date}
@@ -154,9 +154,9 @@ const SearchTicket = () => {
                                 </div>
 
                                 <div className="col-md-6">
-                                    <label className="form-label">TIME</label>
+                                    <label className="form-label">টাইম</label>
                                     <select ref={timeRef} className="form-select" required>
-                                        <option selected="" disabled="" value="">Select...</option>
+                                        <option selected="" disabled="" value="">সিলেক্ট...</option>
                                         <option>07:00 AM</option>
                                         {/* <option>04:00 PM</option> */}
                                         <option>04:20 PM</option>

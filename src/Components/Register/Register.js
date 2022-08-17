@@ -11,9 +11,6 @@ import register from '../../images/bg/register.gif';
 const Register = () => {
   const navigate = useNavigate();
 
-  const [user] = useAuthState(auth);
-
-
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -49,7 +46,7 @@ const Register = () => {
 
       setErrors({
         ...errors,
-        emailError: "Please enter DIU email address"
+        emailError: "ড্যাফোডিল ইন্টারন্যাশনাল ইউনিভার্সিটি থেকে প্রাপ্ত ইমেইল দিন।"
       });
 
       setUserInfo({
@@ -76,7 +73,7 @@ const Register = () => {
 
       setErrors({
         ...errors,
-        passwordError: "Password must be at least 6 characters",
+        passwordError: "পাসওয়ার্ড সর্বনিম্ন ৬ অক্ষর যুক্ত হতে হবে।",
       });
 
       setUserInfo({ ...userInfo, password: "" });
@@ -92,15 +89,8 @@ const Register = () => {
       toast.info(`A verified Link has been sent to your ${userInfo.email} address! Please verify this`);
       navigate("/verified");
     }
-
-
-    // reset value:
     event.target.reset();
   };
-
-  // if (user) {
-  //   navigate("/verified");
-  // };
 
   return (
     <div className="section register">
@@ -137,7 +127,7 @@ const Register = () => {
               </div>
 
               <p className="page_route">
-                Already have an account? <Link to="/login" className="change_page">Please login</Link>
+              আপনার একাউন্ট আছে? <Link to="/login" className="change_page">লগইন করুন</Link>
               </p>
             </form>
           </div>
