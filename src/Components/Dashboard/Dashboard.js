@@ -22,7 +22,7 @@ const Dashboard = () => {
 
                 <div className="row">
                     <div className="col-md-2 sidebar">
-                        <Link class="" to="/dashboard/profile">প্রোফাইল</Link>
+                        <a class="" to="" onClick={() => setProfileShow(true)}>প্রোফাইল</a>
                         {
                             admins.map(admin => <>
                                 {
@@ -34,29 +34,16 @@ const Dashboard = () => {
                                         <Link class="" to="/dashboard/addAdmin" onClick={() => setProfileShow(false)}>এড এডমিন</Link>
                                     </>
                                 }
-
                             </>)
                         }
                     </div>
                     <div className="col-md-10">
                         {
-                            profileShow && <Profile />
+                            profileShow ? <Profile /> : <Outlet></Outlet>
                         }
-
-                        {
-                            admins.map(admin => <>
-
-                                {
-                                    admin?.adminEmail === user?.email
-                                    &&
-                                    <Outlet></Outlet>
-                                }
-
-                            </>)
-                        }
-
                     </div>
                 </div>
+
             </div>
         </div>
     );

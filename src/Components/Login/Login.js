@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import login from '../../images/bg/login.gif';
+import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 
 const Login = () => {
 
@@ -27,12 +28,19 @@ const Login = () => {
 
     const [
         signInWithEmailAndPassword,
-        loading
+        loading, error
     ] = useSignInWithEmailAndPassword(auth);
 
-    if (loading) {
-        <LoadingPage />
+    // if (loading) {
+    //     <LoadingPage />
+    // }
+    
+    if(error) {
+        let error_message = `${JSON.stringify(error)}`;
+        console.log(error_message);
     }
+
+
 
 
     const handleEmailChange = (event) => {
@@ -70,6 +78,7 @@ const Login = () => {
 
 
     const handleFormSubmit = (event) => {
+       
         event.preventDefault();
         if (
             userInfo.password &&
@@ -92,6 +101,7 @@ const Login = () => {
         }
 
     }, [user, navigate, from]);
+    
 
 
     return (
@@ -122,6 +132,10 @@ const Login = () => {
                                         {errors?.passwordError}
                                     </p>
                                 )}
+                            </div>
+
+                            <div className="mb-3">
+                                <Link to="/forgetPassword" className="text-warning">Forget password?</Link>
                             </div>
 
                             <div>

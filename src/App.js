@@ -18,6 +18,7 @@ import ABus from './Components/ABus/ABus';
 import Verified from './Components/Verified/Verified';
 import Home from './Components/Home/Home';
 import Profile from './Components/Profile/Profile';
+import ForgetPassword from './ForgetPassword/ForgetPassword';
 
 
 function App() {
@@ -31,7 +32,6 @@ function App() {
 
   const [user] = useAuthState(auth);
 
-
   return (
     <>
       <Navbar />
@@ -41,6 +41,7 @@ function App() {
         <Route path="/bookTicket" element={<SearchTicket />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
         <Route path="/addBus/update/:id" element={<Update />} />
 
         <Route path="/searchResult" element={
@@ -62,15 +63,7 @@ function App() {
             <Dashboard />
           </RequireAuth>
         }>
-          <Route path="profile" element={<Profile />}>
-          </Route>
-          {/* <Route path="addBus" element={
-            <AddBus />
-          }>
-          </Route>
-          <Route path="allbus" element={<AllBus />}>
-          </Route>
-          <Route path="addAdmin" element={<AddAdmin />}>
+          {/* <Route path="/profile" element={<Profile />}>
           </Route> */}
           {
             admins.map(admin => <>

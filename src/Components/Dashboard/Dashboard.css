@@ -12,6 +12,7 @@
     color: #fff;
     text-decoration: none;
     letter-spacing: 3px;
+    cursor: pointer;
 }
 
 .sidebar a:hover {

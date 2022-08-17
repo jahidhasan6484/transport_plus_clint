@@ -544,18 +544,6 @@ const ABus = () => {
                                 }
                             </p>
                         </div>
-                        {/* <div className="ticket_details">
-                            <p>Price: </p>
-                            <p>
-                                {
-                                    sessionStorage.getItem("userType") ==== "Faculty"
-                                        ?
-                                        "40 BDT"
-                                        :
-                                        "25 BDT"
-                                }
-                            </p>
-                        </div> */}
                         {
                             <button onClick={handleUpdateTicket} className="btn btn-dark">Continue</button>
                         }
