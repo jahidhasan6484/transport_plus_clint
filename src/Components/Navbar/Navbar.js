@@ -22,7 +22,7 @@ const Navbar = () => {
     const [admins, setAdmins] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/addAdmin')
+        fetch('https://transport-plus-server.herokuapp.com/addAdmin')
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);

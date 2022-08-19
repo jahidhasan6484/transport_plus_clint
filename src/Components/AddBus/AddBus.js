@@ -341,7 +341,7 @@ const AddBus = () => {
             route, userType, busName, journeyType, startTime, date: dateFormate, totalSeat, available, unavailable, seats
         };
 
-        fetch('http://localhost:5000/addBus', {
+        fetch('https://transport-plus-server.herokuapp.com/addBus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

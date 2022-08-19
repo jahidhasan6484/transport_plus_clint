@@ -6,7 +6,7 @@ const SearchResult = () => {
     const [buses, setBuses] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/addBus')
+        fetch('https://transport-plus-server.herokuapp.com/addBus')
             .then(res => res.json())
             .then(data => {
                 const filterResult =
