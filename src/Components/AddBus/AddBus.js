@@ -351,7 +351,7 @@ const AddBus = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert("Data added successfully");
+                    alert("ডাটা অ্যাডেড সাকসেসফুল্লী।");
                     e.target.reset();
                     setDate(null);
                 }

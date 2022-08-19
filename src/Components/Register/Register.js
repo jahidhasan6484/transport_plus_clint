@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Register.css";
 import auth from '../../firebase.init';
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingPage from "../LoadingPage/LoadingPage";
@@ -85,8 +85,9 @@ const Register = () => {
 
     if (userInfo.email && userInfo.password) {
       createUserWithEmailAndPassword(userInfo.email, userInfo.password);
-      toast.success(`${userInfo.email} created Successfully`);
-      toast.info(`A verified Link has been sent to your ${userInfo.email} address! Please verify this`);
+      toast.success(`${userInfo.email} ইউজার ক্রিয়েটেড সাকসেসফুল্লী।`);
+      toast.info(`আপনার ${userInfo.email} ইমেইলে একটি ভেরিফিকেশন লিংক পাঠানো হয়েছে।
+      দয়া করে ভেরিফাই করুন।`);
       navigate("/verified");
     }
     event.target.reset();

@@ -5,9 +5,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingPage from "../LoadingPage/LoadingPage";
 import login from '../../images/bg/login.gif';
-import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 
 const Login = () => {
 

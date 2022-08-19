@@ -5,8 +5,6 @@ import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
-import Home from '../Home/Home';
-import SearchTicket from '../SearchTicket/SearchTicket';
 
 
 const Navbar = () => {

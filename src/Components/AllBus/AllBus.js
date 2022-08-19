@@ -6,7 +6,7 @@ const AllBus = () => {
     const [buses, setBuses] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/addBus')
+        fetch('https://transport-plus-server.herokuapp.com/addBus')
             .then(res => res.json())
             .then(data => setBuses(data));
     }, []);
@@ -15,14 +15,14 @@ const AllBus = () => {
     const handleDeleteData = id => {
         const proceed = window.confirm("Do you really want to delete?");
         if (proceed) {
-            const url = `http://localhost:5000/addBus/${id}`;
+            const url = `https://transport-plus-server.herokuapp.com/addBus/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
-                        alert('Deleted Successfully');
+                        alert('ডাটা অ্যাডেড সাকসেসফুল্লী।');
                         const remainingBuses = buses.filter(bus => bus._id !== id);
                         setBuses(remainingBuses);
                     }

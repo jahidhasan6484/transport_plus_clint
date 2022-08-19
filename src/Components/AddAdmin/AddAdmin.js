@@ -14,7 +14,7 @@ const AddAdmin = () => {
                 adminEmail
             };
 
-            fetch('http://localhost:5000/addAdmin', {
+            fetch('https://transport-plus-server.herokuapp.com/addAdmin', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -24,7 +24,7 @@ const AddAdmin = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.insertedId) {
-                        alert("You added a student as an admin");
+                        alert("এডমিন অ্যাডেড সাকসেসফুল্লী।");
                         e.target.reset();
                     }
                 })
@@ -34,7 +34,7 @@ const AddAdmin = () => {
                 adminEmail
             };
 
-            fetch('http://localhost:5000/addAdmin', {
+            fetch('https://transport-plus-server.herokuapp.com/addAdmin', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -44,7 +44,7 @@ const AddAdmin = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.insertedId) {
-                        alert("You added a faculty as an admin");
+                        alert("এডমিন অ্যাডেড সাকসেসফুল্লী।");
                         e.target.reset();
                     }
                 })
