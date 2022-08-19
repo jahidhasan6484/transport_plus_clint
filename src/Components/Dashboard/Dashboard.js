@@ -11,7 +11,7 @@ const Dashboard = () => {
     const [profileShow, setProfileShow] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5000/addAdmin')
+        fetch('https://transport-plus-server.herokuapp.com/addAdmin')
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);
@@ -26,7 +26,7 @@ const Dashboard = () => {
                         {
                             admins.map(admin => <>
                                 {
-                                    admin?.adminEmail === user?.email
+                                    admin?.adminEmail == user?.email
                                     &&
                                     <>
                                         <Link class="" to="/dashboard/addBus" onClick={() => setProfileShow(false)}>এড বাস</Link>
