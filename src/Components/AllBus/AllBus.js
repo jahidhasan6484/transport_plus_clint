@@ -13,7 +13,7 @@ const AllBus = () => {
 
     //DELETE DATA
     const handleDeleteData = id => {
-        const proceed = window.confirm("Do you really want to delete?");
+        const proceed = window.confirm("সত্যিই ডিলেট করতে চান?");
         if (proceed) {
             const url = `https://evening-fjord-37023.herokuapp.com/addBus/${id}`;
             fetch(url, {
