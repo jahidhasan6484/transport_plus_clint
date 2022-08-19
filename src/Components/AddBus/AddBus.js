@@ -341,7 +341,7 @@ const AddBus = () => {
             route, userType, busName, journeyType, startTime, date: dateFormate, totalSeat, available, unavailable, seats
         };
 
-        fetch('https://transport-plus-server.herokuapp.com/addBus', {
+        fetch('https://evening-fjord-37023.herokuapp.com/addBus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

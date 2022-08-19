@@ -6,7 +6,7 @@ const AllBus = () => {
     const [buses, setBuses] = useState([]);
 
     useEffect(() => {
-        fetch('https://transport-plus-server.herokuapp.com/addBus')
+        fetch('https://evening-fjord-37023.herokuapp.com/addBus')
             .then(res => res.json())
             .then(data => setBuses(data));
     }, []);
@@ -15,7 +15,7 @@ const AllBus = () => {
     const handleDeleteData = id => {
         const proceed = window.confirm("Do you really want to delete?");
         if (proceed) {
-            const url = `https://transport-plus-server.herokuapp.com/addBus/${id}`;
+            const url = `https://evening-fjord-37023.herokuapp.com/addBus/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
