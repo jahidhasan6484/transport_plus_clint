@@ -32,13 +32,6 @@ const Login = () => {
     // if (loading) {
     //     <LoadingPage />
     // }
-    
-    if(error) {
-        let error_message = `${JSON.stringify(error)}`;
-        console.log(error_message);
-    }
-
-
 
 
     const handleEmailChange = (event) => {

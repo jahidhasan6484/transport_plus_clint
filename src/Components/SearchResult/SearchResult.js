@@ -38,10 +38,11 @@ const SearchResult = () => {
                                     <div className='col search_bus_info'>এভেইলেবল সিট</div>
                                     <div className='col search_bus_info'>অপশন</div>
                                 </div>
-                                <div className='col-md-12 search_bus_content'>
-                                    {
-                                        buses.map(bus =>
-                                            <>
+
+                                {
+                                    buses.map(bus =>
+                                        <>
+                                            <div className='col-md-12 search_bus_content'>
                                                 <div className='col search_bus_info'>{bus.busName}</div>
                                                 <div className='col search_bus_info'>{bus.available}</div>
                                                 <div className='col search_bus_info'>
@@ -49,10 +50,10 @@ const SearchResult = () => {
                                                         View Seats
                                                     </Link>
                                                 </div>
-                                            </>
-                                        )
-                                    }
-                                </div>
+                                            </div>
+                                        </>
+                                    )
+                                }
                             </div>
                         </div>
                 }

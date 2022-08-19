@@ -17,8 +17,8 @@ import auth from './firebase.init';
 import ABus from './Components/ABus/ABus';
 import Verified from './Components/Verified/Verified';
 import Home from './Components/Home/Home';
-import Profile from './Components/Profile/Profile';
-import ForgetPassword from './ForgetPassword/ForgetPassword';
+import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
+import Contact from './Components/Contact/Contact';
 
 
 function App() {
@@ -43,6 +43,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
         <Route path="/addBus/update/:id" element={<Update />} />
+        <Route path="/contact" element={<Contact />} />
 
         <Route path="/searchResult" element={
           <RequireAuth>

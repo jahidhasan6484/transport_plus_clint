@@ -125,3 +125,15 @@
     letter-spacing: 3px;
 }
 
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar_menu{
+    color: #fff;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+}

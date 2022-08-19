@@ -41,15 +41,6 @@
     color: red;
 }
 
-.bus_data {
-    letter-spacing: 5px;
-}
-
-tr {
-    color: #fff;
-    letter-spacing: 3px;
-}
-
 .search_bus_content {
     display: flex;
     align-items: center;

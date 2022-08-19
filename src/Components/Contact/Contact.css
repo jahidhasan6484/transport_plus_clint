@@ -1,0 +1,10 @@
+.contact_content{
+    color: #fff;
+    margin-top: 15rem;
+    text-align: center;
+}
+
+.contact_content h3 {
+    padding-bottom: 2rem;
+    color: orange;
+}

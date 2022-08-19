@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import './ForgetPassword.css';
-import auth from '../firebase.init';
+import auth from '../../firebase.init';
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
-import LoadingPage from "../Components/LoadingPage/LoadingPage";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 const ForgetPassword = () => {
     const [email, setEmail] = useState('');
