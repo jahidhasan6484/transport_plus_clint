@@ -141,7 +141,7 @@ const Login = () => {
                         </form>
                     </div>
                     <div className="col-md-5">
-                        <img src={login}></img>
+                        <img src={login} className="img-fluid"></img>
                     </div>
                 </div>
             </div>

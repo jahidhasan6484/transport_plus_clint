@@ -133,7 +133,7 @@ const Register = () => {
             </form>
           </div>
           <div className="col-md-5">
-            <img src={register}></img>
+            <img src={register} className="img-fluid"></img>
           </div>
         </div>
 
