@@ -6,7 +6,7 @@ const Update = () => {
     const [bus, setBus] = useState({});
 
     useEffect(() => {
-        const url = `https://evening-fjord-37023.herokuapp.com/addBus/${id}`;
+        const url = `https://transport-plus-server.vercel.app/addBus/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setBus(data))
@@ -31,7 +31,7 @@ const Update = () => {
     }
 
     const handleUpdateBus = (e) => {
-        const url = `https://evening-fjord-37023.herokuapp.com/addBus/${id}`;
+        const url = `https://transport-plus-server.vercel.app/addBus/${id}`;
 
         fetch(url, {
             method: 'PUT',

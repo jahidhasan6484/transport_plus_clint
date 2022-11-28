@@ -10,7 +10,7 @@ const Profile = () => {
     const [userTicket, setUserTicket] = useState([]);
 
     useEffect(() => {
-        fetch('https://evening-fjord-37023.herokuapp.com/updateUserTicketCollection')
+        fetch('https://transport-plus-server.vercel.app/updateUserTicketCollection')
             .then(res => res.json())
             .then(data => {
                 const filterResult =

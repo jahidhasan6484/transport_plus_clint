@@ -18,7 +18,7 @@ const ABus = () => {
     const [toSelected, setToSelected] = useState(null);
 
     useEffect(() => {
-        const url = `https://evening-fjord-37023.herokuapp.com/addBus/${id}`;
+        const url = `https://transport-plus-server.vercel.app/addBus/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setABus(data))
@@ -64,7 +64,7 @@ const ABus = () => {
     const [canBookTicket, setCanBookTicket] = useState(true);
 
     useEffect(() => {
-        fetch('https://evening-fjord-37023.herokuapp.com/updateUserTicketCollection')
+        fetch('https://transport-plus-server.vercel.app/updateUserTicketCollection')
             .then(res => res.json())
             .then(data => {
                 const filterResult =
@@ -83,8 +83,8 @@ const ABus = () => {
         if (seat === null) {
             alert("দয়া করে এভেইলেবল সিট থেকে সিলেক্ট করুন।");
         } else if (canBookTicket.length < 1) {
-            const url = `https://evening-fjord-37023.herokuapp.com/updateTicket/${id}`;
-            const url2 = "https://evening-fjord-37023.herokuapp.com/updateUserTicketCollection";
+            const url = `https://transport-plus-server.vercel.app/updateTicket/${id}`;
+            const url2 = "https://transport-plus-server.vercel.app/updateUserTicketCollection";
 
             fetch(url2, {
                 method: 'POST',

@@ -20,7 +20,7 @@ const Navbar = () => {
     const [admins, setAdmins] = useState([]);
 
     useEffect(() => {
-        fetch('https://evening-fjord-37023.herokuapp.com/addAdmin')
+        fetch('https://transport-plus-server.vercel.app/addAdmin')
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);

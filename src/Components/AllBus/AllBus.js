@@ -6,7 +6,7 @@ const AllBus = () => {
     const [buses, setBuses] = useState([]);
 
     useEffect(() => {
-        fetch('https://evening-fjord-37023.herokuapp.com/addBus')
+        fetch('https://transport-plus-server.vercel.app/addBus')
             .then(res => res.json())
             .then(data => setBuses(data));
     }, []);
@@ -15,7 +15,7 @@ const AllBus = () => {
     const handleDeleteData = id => {
         const proceed = window.confirm("সত্যিই ডিলেট করতে চান?");
         if (proceed) {
-            const url = `https://evening-fjord-37023.herokuapp.com/addBus/${id}`;
+            const url = `https://transport-plus-server.vercel.app/addBus/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

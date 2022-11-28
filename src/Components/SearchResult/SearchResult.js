@@ -6,7 +6,7 @@ const SearchResult = () => {
     const [buses, setBuses] = useState([]);
 
     useEffect(() => {
-        fetch('https://evening-fjord-37023.herokuapp.com/addBus')
+        fetch('https://transport-plus-server.vercel.app/addBus')
             .then(res => res.json())
             .then(data => {
                 const filterResult =
