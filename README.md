@@ -1,3 +1,3 @@
 # Live Link:
 
-https://transport-plus1.herokuapp.com/
+https://transportplus.netlify.app/

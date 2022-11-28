@@ -14,7 +14,7 @@ const AddAdmin = () => {
                 adminEmail
             };
 
-            fetch('https://transport-plus-server.vercel.app/addAdmin', {
+            fetch('https://transport-plus-server-4ys1.vercel.app/addAdmin', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -34,7 +34,7 @@ const AddAdmin = () => {
                 adminEmail
             };
 
-            fetch('https://transport-plus-server.vercel.app/addAdmin', {
+            fetch('https://transport-plus-server-4ys1.vercel.app/addAdmin', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

@@ -161,3 +161,7 @@ table {
 label {
     letter-spacing: 3px;
 }
+
+.error {
+    color: red;
+}

@@ -6,7 +6,7 @@ const SearchResult = () => {
     const [buses, setBuses] = useState([]);
 
     useEffect(() => {
-        fetch('https://transport-plus-server.vercel.app/addBus')
+        fetch('https://transport-plus-server-4ys1.vercel.app/addBus')
             .then(res => res.json())
             .then(data => {
                 const filterResult =

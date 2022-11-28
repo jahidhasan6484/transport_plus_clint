@@ -10,7 +10,7 @@ const Profile = () => {
     const [userTicket, setUserTicket] = useState([]);
 
     useEffect(() => {
-        fetch('https://transport-plus-server.vercel.app/updateUserTicketCollection')
+        fetch('https://transport-plus-server-4ys1.vercel.app/updateUserTicketCollection')
             .then(res => res.json())
             .then(data => {
                 const filterResult =

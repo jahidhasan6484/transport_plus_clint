@@ -6,7 +6,7 @@ const AllBus = () => {
     const [buses, setBuses] = useState([]);
 
     useEffect(() => {
-        fetch('https://transport-plus-server.vercel.app/addBus')
+        fetch('https://transport-plus-server-4ys1.vercel.app/addBus')
             .then(res => res.json())
             .then(data => setBuses(data));
     }, []);
@@ -15,7 +15,7 @@ const AllBus = () => {
     const handleDeleteData = id => {
         const proceed = window.confirm("সত্যিই ডিলেট করতে চান?");
         if (proceed) {
-            const url = `https://transport-plus-server.vercel.app/addBus/${id}`;
+            const url = `https://transport-plus-server-4ys1.vercel.app/addBus/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

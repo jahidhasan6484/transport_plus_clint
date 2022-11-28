@@ -21,7 +21,7 @@ const Register = () => {
     passwordError: "",
   });
 
-  const [createUserWithEmailAndPassword, loading, hooksError] =
+  const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
   if (loading) {
@@ -122,6 +122,8 @@ const Register = () => {
                   </p>
                 )}
               </div>
+
+              <p className="error">asds{error?.message}</p>
 
               <div>
                 <input type="submit" value="রেজিষ্টার" className='btn btn-dark' />

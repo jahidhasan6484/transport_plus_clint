@@ -24,14 +24,12 @@ const Login = () => {
         passwordError: "",
     });
 
-    const [
-        signInWithEmailAndPassword,
-        loading, error
-    ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword, signInuser, loading, error] = useSignInWithEmailAndPassword(auth);
 
-    // if (loading) {
-    //     <LoadingPage />
-    // }
+    if(error) {
+        console.log(error)
+    }
+
 
 
     const handleEmailChange = (event) => {
@@ -124,6 +122,7 @@ const Login = () => {
                                     </p>
                                 )}
                             </div>
+                            <p className="error">{error?.message}</p>
 
                             <div className="mb-3">
                                 <Link to="/forgetPassword" className="text-warning">পাসওয়ার্ড ভুলে গেছেন?</Link>

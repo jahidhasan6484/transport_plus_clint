@@ -341,7 +341,7 @@ const AddBus = () => {
             route, userType, busName, journeyType, startTime, date: dateFormate, totalSeat, available, unavailable, seats
         };
 
-        fetch('https://transport-plus-server.vercel.app/addBus', {
+        fetch('https://transport-plus-server-4ys1.vercel.app/addBus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

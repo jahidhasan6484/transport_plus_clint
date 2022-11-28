@@ -11,7 +11,7 @@ const Dashboard = () => {
     const [profileShow, setProfileShow] = useState(true);
 
     useEffect(() => {
-        fetch('https://transport-plus-server.vercel.app/addAdmin')
+        fetch('https://transport-plus-server-4ys1.vercel.app/addAdmin')
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);
