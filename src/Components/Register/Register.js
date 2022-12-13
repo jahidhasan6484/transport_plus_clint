@@ -123,7 +123,7 @@ const Register = () => {
                 )}
               </div>
 
-              <p className="error">asds{error?.message}</p>
+              <p className="error">{error?.message}</p>
 
               <div>
                 <input type="submit" value="রেজিষ্টার" className='btn btn-dark' />

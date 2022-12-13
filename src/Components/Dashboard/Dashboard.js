@@ -4,6 +4,7 @@ import './Dashboard.css';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Profile from "../Profile/Profile";
+import api from "../API/API";
 
 const Dashboard = () => {
     const [user] = useAuthState(auth);
@@ -11,7 +12,7 @@ const Dashboard = () => {
     const [profileShow, setProfileShow] = useState(true);
 
     useEffect(() => {
-        fetch('https://transport-plus-server-4ys1.vercel.app/addAdmin')
+        fetch(`${api}/addAdmin`)
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);

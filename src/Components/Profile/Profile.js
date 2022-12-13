@@ -3,6 +3,7 @@ import './Profile.css';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import profilePhoto from '../../images/bg/profile.svg';
+import api from "../API/API";
 
 const Profile = () => {
     const [user] = useAuthState(auth);
@@ -10,7 +11,7 @@ const Profile = () => {
     const [userTicket, setUserTicket] = useState([]);
 
     useEffect(() => {
-        fetch('https://transport-plus-server-4ys1.vercel.app/updateUserTicketCollection')
+        fetch(`${api}/updateUserTicketCollection`)
             .then(res => res.json())
             .then(data => {
                 const filterResult =

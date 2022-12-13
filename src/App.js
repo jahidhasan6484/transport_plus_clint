@@ -19,13 +19,14 @@ import Verified from './Components/Verified/Verified';
 import Home from './Components/Home/Home';
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
 import Contact from './Components/Contact/Contact';
+import api from './Components/API/API';
 
 
 function App() {
   const [admins, setAdmins] = useState([]);
 
   useEffect(() => {
-    fetch('https://evening-fjord-37023.herokuapp.com/addAdmin')
+    fetch(`${api}/addAdmin`)
       .then(res => res.json())
       .then(data => setAdmins(data));
   }, []);

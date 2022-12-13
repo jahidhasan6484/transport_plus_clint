@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import addDays from 'date-fns/addDays';
+import api from '../API/API';
 
 const AddBus = () => {
     const routeRef = useRef();
@@ -341,7 +342,7 @@ const AddBus = () => {
             route, userType, busName, journeyType, startTime, date: dateFormate, totalSeat, available, unavailable, seats
         };
 
-        fetch('https://transport-plus-server-4ys1.vercel.app/addBus', {
+        fetch(`${api}/addBus`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

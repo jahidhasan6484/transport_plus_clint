@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../API/API';
 import './SearchResult.css';
 
 const SearchResult = () => {
     const [buses, setBuses] = useState([]);
 
     useEffect(() => {
-        fetch('https://transport-plus-server-4ys1.vercel.app/addBus')
+        fetch(`${api}/addBus`)
             .then(res => res.json())
             .then(data => {
                 const filterResult =

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import api from "../API/API";
 
 const Update = () => {
     const { id } = useParams();
     const [bus, setBus] = useState({});
 
     useEffect(() => {
-        const url = `https://transport-plus-server-4ys1.vercel.app/addBus/${id}`;
+        const url = `${api}/addBus/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setBus(data))
@@ -31,7 +32,7 @@ const Update = () => {
     }
 
     const handleUpdateBus = (e) => {
-        const url = `https://transport-plus-server-4ys1.vercel.app/addBus/${id}`;
+        const url = `${api}/addBus/${id}`;
 
         fetch(url, {
             method: 'PUT',

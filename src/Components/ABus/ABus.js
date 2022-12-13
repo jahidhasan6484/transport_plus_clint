@@ -7,6 +7,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { GiSteeringWheel } from 'react-icons/gi';
+import api from "../API/API";
 
 
 const ABus = () => {
@@ -18,7 +19,7 @@ const ABus = () => {
     const [toSelected, setToSelected] = useState(null);
 
     useEffect(() => {
-        const url = `https://transport-plus-server-4ys1.vercel.app/addBus/${id}`;
+        const url = `${api}/addBus/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setABus(data))
@@ -64,7 +65,7 @@ const ABus = () => {
     const [canBookTicket, setCanBookTicket] = useState(true);
 
     useEffect(() => {
-        fetch('https://transport-plus-server-4ys1.vercel.app/updateUserTicketCollection')
+        fetch(`${api}/updateUserTicketCollection`)
             .then(res => res.json())
             .then(data => {
                 const filterResult =
@@ -83,8 +84,8 @@ const ABus = () => {
         if (seat === null) {
             alert("দয়া করে এভেইলেবল সিট থেকে সিলেক্ট করুন।");
         } else if (canBookTicket.length < 1) {
-            const url = `https://transport-plus-server-4ys1.vercel.app/updateTicket/${id}`;
-            const url2 = "https://transport-plus-server-4ys1.vercel.app/updateUserTicketCollection";
+            const url = `${api}/updateTicket/${id}`;
+            const url2 = `${api}/updateUserTicketCollection`;
 
             fetch(url2, {
                 method: 'POST',

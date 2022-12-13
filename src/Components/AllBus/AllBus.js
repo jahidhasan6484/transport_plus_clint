@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../API/API";
 import './AllBus.css';
 
 const AllBus = () => {
     const [buses, setBuses] = useState([]);
 
     useEffect(() => {
-        fetch('https://transport-plus-server-4ys1.vercel.app/addBus')
+        fetch(`${api}/addBus`)
             .then(res => res.json())
             .then(data => setBuses(data));
     }, []);
@@ -15,7 +16,7 @@ const AllBus = () => {
     const handleDeleteData = id => {
         const proceed = window.confirm("সত্যিই ডিলেট করতে চান?");
         if (proceed) {
-            const url = `https://transport-plus-server-4ys1.vercel.app/addBus/${id}`;
+            const url = `${api}/addBus/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

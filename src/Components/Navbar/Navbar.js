@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
+import api from '../API/API';
 
 
 const Navbar = () => {
@@ -20,7 +21,7 @@ const Navbar = () => {
     const [admins, setAdmins] = useState([]);
 
     useEffect(() => {
-        fetch('https://transport-plus-server-4ys1.vercel.app/addAdmin')
+        fetch(`${api}/addAdmin`)
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);

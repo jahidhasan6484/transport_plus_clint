@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import api from '../API/API';
 
 const AddAdmin = () => {
     const adminEmailRef = useRef();
@@ -14,7 +15,7 @@ const AddAdmin = () => {
                 adminEmail
             };
 
-            fetch('https://transport-plus-server-4ys1.vercel.app/addAdmin', {
+            fetch(`${api}/addAdmin`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -34,7 +35,7 @@ const AddAdmin = () => {
                 adminEmail
             };
 
-            fetch('https://transport-plus-server-4ys1.vercel.app/addAdmin', {
+            fetch(`${api}/addAdmin`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
